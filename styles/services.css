@@ -1,0 +1,113 @@
+@import url('_vars.css');
+
+.services {
+  min-height: 75vh;
+  display: flex;
+  background-color: var(--black);
+  padding: 48px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 64px;
+
+  .service-item {
+    flex: 1 0 0;
+    border: 1px solid rgba(var(--white-rgb), 0.8);
+    border-radius: 16px;
+    color: var(--white);
+    padding: 2rem 2rem 4rem 2rem;
+    align-self: stretch;
+    position: relative;
+    min-width: 200px;
+    max-width: 300px;
+    transition: color 0.3s ease;
+    aspect-ratio: 9 / 16;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(var(--black-rgb), 0.4), rgba(var(--black-rgb), 0.2), rgba(var(--black-rgb), 0.4));
+      z-index: 1;
+      border-radius: 16px;
+    }
+
+    &:nth-child(1):hover {
+      background: url('../assets/services/ugc.JPG') no-repeat center center / cover;
+    }
+
+    &:nth-child(2):hover {
+      background: url('../assets/services/shoot-day.JPEG') no-repeat center center / cover;
+    }
+
+    &:nth-child(3):hover {
+      background: url('../assets/services/graphic-projects.JPG') no-repeat center center / cover;
+    }
+
+    &:hover {
+      .item-content {
+        .item-description-container {
+          .item-link {
+            svg {
+              color: var(--primary);
+            }
+          }
+        }
+      }
+    }
+
+    .item-content {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 3;
+      position: relative;
+      height: 100%;
+
+      .item-title {
+        font-size: 1.5em;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+
+      .item-keywords {
+        font-size: 1em;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      .item-description-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: auto;
+        height: 96px;
+        position: relative;
+
+        .item-description {
+          font-size: 1em;
+          font-weight: 300;
+        }
+
+        .item-link {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+
+          svg {
+            width: 32px;
+            height: 32px;
+            color: var(--white);
+          }
+        }
+      }
+
+      .spacer {
+        flex: 1;
+      }
+    }
+  }
+}

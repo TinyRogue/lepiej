@@ -1,0 +1,59 @@
+@import url('_vars.css');
+
+:root {
+  --no-of-slides: 7;
+  --slides-in-view: 5;
+  --slide-width: max(calc(100vw / var(--slides-in-view)), 250px);
+  --iteration-time: 15s;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(var(--slide-width) * var(--no-of-slides) * -1));
+  }
+}
+
+.collaborations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: calc(var(--slides-in-view) * var(--slide-width));
+  height: 30vh;
+  overflow: hidden;
+  width: 100%;
+
+  .collaborations-header {
+    color: var(--black);
+    font-size: 2rem;
+    font-family: var(--serif-font-family);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .carousel_wrapper {
+    display: flex;
+    align-items: center;
+    width: calc(var(--slides-in-view) * var(--slide-width));
+    overflow: hidden;
+    margin: 48px auto 0 auto;
+  }
+
+  .carousel_slide {
+    animation: scroll var(--iteration-time) linear infinite;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: var(--slide-width);
+
+    .carousel_image {
+      width: 50%;
+    }
+  }
+}

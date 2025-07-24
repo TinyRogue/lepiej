@@ -1,0 +1,45 @@
+@import url('_vars.css');
+
+.meet-me {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: auto;
+  margin-top: 2.5em;
+  height: 85vh;
+
+  & .meet-me-title {
+    font-family: var(--serif-font-family);
+    font-size: 64px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  & .meet-me-description {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: var(--black);
+    margin-top: 1em;
+    text-align: center;
+  }
+
+  & .meet-me-cta {
+    margin-top: 2em;
+    padding: 1em 2em;
+    background-color: var(--primary);
+    border-radius: var(--button-radius);
+    border: none;
+    color: var(--black);
+    font-family: var(--font-family);
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--primary-dark);
+    }
+  }
+}
