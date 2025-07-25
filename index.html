@@ -13,6 +13,7 @@
     rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <link rel="stylesheet" type="text/css" href="styles/navbar.css">
   <link rel="stylesheet" type="text/css" href="styles/utility.css">
   <link rel="stylesheet" type="text/css" href="styles/meet-me.css">
   <link rel="stylesheet" type="text/css" href="styles/services.css">
@@ -38,12 +39,16 @@
 <body>
   <header>
     <nav class="navbar">
+      <a href="#" class="logo-mobile">
+        <img src="assets/utility/logo.svg" alt="Lepiej. Logo" class="logo">
+      </a>
+
       <ul class="nav-left">
         <li><a class="pill" href="#meet-me-section">O mnie</a></li>
         <li><a class="pill" href="#services-section">Oferta</a></li>
       </ul>
 
-      <a href="#">
+      <a href="#" class="logo-desktop">
         <img src="assets/utility/logo.svg" alt="Lepiej. Logo" class="logo">
       </a>
 
@@ -51,6 +56,20 @@
         <li><a class="pill" href="#portfolio-section">Portfolio</a></li>
         <li><a class="pill" href="#contact-section">Kontakt</a></li>
       </ul>
+
+      <button class="burger-menu" aria-label="Toggle navigation menu">
+        <span class="burger-line burger-line-1"></span>
+        <span class="burger-line burger-line-2"></span>
+      </button>
+
+      <div class="mobile-menu">
+        <ul class="mobile-nav">
+          <li><a href="#meet-me-section">O mnie</a></li>
+          <li><a href="#services-section">Oferta</a></li>
+          <li><a href="#portfolio-section">Portfolio</a></li>
+          <li><a href="#contact-section">Kontakt</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
   <main>
@@ -278,10 +297,10 @@
 
           <div class="social-section">
             <div class="social-links">
-              <a href="#" class="social-link instagram" aria-label="Instagram">
+              <a href="https://www.instagram.com/lepiej.agencja/" target="_blank" class="social-link instagram" aria-label="Instagram">
                 <img src="assets/utility/instagram.png" alt="Instagram">
               </a>
-              <a href="#" class="social-link tiktok" aria-label="TikTok">
+              <a href="https://www.tiktok.com/@lepiej.socialmedia" target="_blank" class="social-link tiktok" aria-label="TikTok">
                 <img src="assets/utility/tik-tok.png" alt="TikTok">
               </a>
             </div>
@@ -296,6 +315,7 @@
   </footer>
 
   <script src="scripts/main.js" defer></script>
+  <script src="scripts/navbar.js" defer></script>
   <script src="scripts/portfolio.js" defer></script>
   <script src="scripts/collaborations.js" defer></script>
   <script src="scripts/contact-form.js" defer></script>
