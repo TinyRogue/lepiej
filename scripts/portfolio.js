@@ -1,3 +1,5 @@
+const MOBILE_BREAKPOINT = 440;
+
 const PORTFOLIO_TRACK_ITEM_DESCRIPTIONS = [
   '',
   { company: '', service: '' },
@@ -19,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const portfolioItemDescriptionContainer = document.querySelector('.portfolio-item-description');
 
   if (!portfolioTrack || portfolioItems.length === 0) return;
+
+  if (window.innerWidth < MOBILE_BREAKPOINT) {
+    portfolioItems.item(portfolioItems.length - 1).remove();
+    portfolioItems.item(0).remove();
+  }
 
   function updateItemOpacity() {
     const trackRect = portfolioTrack.getBoundingClientRect();
