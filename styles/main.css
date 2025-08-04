@@ -8,8 +8,20 @@
 
 html {
   font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-size: 16px;
   scroll-behavior: smooth;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 440px) {
+    font-size: 14px;
+  }
 }
 
 body {
@@ -29,13 +41,19 @@ p {
   padding: 0;
 }
 
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 0.5rem 2rem;
+  padding: 4px 14px;
 
   .navbar {
     display: flex;
@@ -43,7 +61,7 @@ header {
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(10px);
-    padding: 1rem;
+    padding: 12px 16px;
     border-radius: 10px;
     background-color: rgba(var(--white-rgb), .8);
 
@@ -59,6 +77,10 @@ header {
     & .logo {
       height: 32px;
       width: auto;
+
+      @media (max-width: 440px) {
+        height: 20px;
+      }
     }
 
     & li {
@@ -85,7 +107,7 @@ header {
 
 .hero {
   position: relative;
-  height: calc(100dvh - 80px);
+  height: calc(100dvh - 84px);
   background-image: url('../assets/hero.JPEG');
   background-size: cover;
   background-position: center;
@@ -95,8 +117,13 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 70px 1rem 0px 1rem;
+  margin: 70px 14px 0 14px;
   padding: 0;
+
+  @media (max-width: 440px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
   &::before {
     content: '';
@@ -122,8 +149,16 @@ header {
       line-height: 0.8;
       font-weight: 400;
 
-      .writing {
-        font-size: 0.9em;
+      @media (max-width: 1024px) {
+        font-size: 4.5em;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 4em;
+      }
+
+      @media (max-width: 440px) {
+        font-size: 2.5em;
       }
     }
   }
@@ -146,7 +181,7 @@ header {
     z-index: 2;
 
     & span {
-      font-size: 0.8em;
+      font-size: 0.75em;
       transform: translateY(-50%)
     }
   }

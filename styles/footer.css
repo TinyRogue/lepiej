@@ -8,7 +8,7 @@
   background-repeat: no-repeat;
   padding: 4rem 2rem;
   margin-top: 4rem;
-  height: 75vh;
+  min-height: 75vh;
 
   &::before {
     content: '';
@@ -38,13 +38,13 @@
       align-items: flex-start;
       width: 100%;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 48px;
     }
 
     .footer-left {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      flex-grow: 1;
 
       .contact-form-section {
         .contact-form {
@@ -53,10 +53,12 @@
           gap: 16px;
           max-width: 400px;
 
-          .content-form-field {
+          .contact-form-field {
             display: flex;
             flex-direction: column;
             gap: 8px;
+            width: 100%;
+            flex-grow: 1;
           }
 
           label {
@@ -76,7 +78,8 @@
             font-family: var(--font-family);
             font-size: 1em;
             transition: all 0.3s ease;
-            min-width: 400px;
+            width: 100%;
+            flex-grow: 1;
 
             &::placeholder {
               color: rgba(var(--white-rgb), 0.7);
@@ -121,9 +124,8 @@
 
       h2 {
         font-family: var(--font-family);
-        font-size: 3rem;
+        font-size: 3em;
         font-weight: 400;
-        margin-bottom: 2rem;
         text-transform: uppercase;
         letter-spacing: 2px;
       }
@@ -131,15 +133,14 @@
       .contact-info {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
 
         .contact-item {
+          margin-top: 16px;
           color: var(--white);
           text-decoration: none;
           font-size: 1.2rem;
           font-weight: 300;
           transition: all 0.3s ease;
-          padding: 0.5rem;
           border-radius: 8px;
 
           &:hover {
@@ -152,7 +153,7 @@
     .social-section {
       .social-links {
         display: flex;
-        gap: 1rem;
+        gap: 14px;
         justify-content: flex-start;
         margin-top: 16px;
 
@@ -189,6 +190,11 @@
         height: 60px;
         width: auto;
         filter: brightness(0) invert(1);
+
+
+        @media (max-width: 440px) {
+          height: 32px;
+        }
       }
     }
   }
@@ -196,50 +202,5 @@
   .footer-contact {
     background-color: var(--black);
     height: 30vh;
-  }
-
-  /* Responsive design */
-  @media (max-width: 768px) {
-    padding: 3rem 1rem;
-
-    .footer-content {
-      .footer-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-      }
-
-      .contact-section {
-        h2 {
-          font-size: 2rem;
-        }
-
-        .contact-info {
-          .contact-item {
-            font-size: 1rem;
-          }
-        }
-      }
-
-      .social-section {
-        .social-links {
-          gap: 1rem;
-
-          .social-link {
-            width: 28px;
-            height: 28px;
-
-            img {
-              width: 14px;
-              height: 14px;
-            }
-          }
-        }
-      }
-
-      .footer-logo img {
-        height: 48px;
-      }
-    }
   }
 }
