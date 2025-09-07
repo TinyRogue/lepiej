@@ -184,4 +184,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const titleInput = document.getElementById('form-title');
+      const contentInput = document.getElementById('form-content');
+
+      const title = titleInput.value.trim();
+      const content = contentInput.value.trim();
+
+      if (title && content) {
+        const emailSubject = encodeURIComponent(title);
+        const emailBody = encodeURIComponent(content);
+        const mailtoUrl = `mailto:lepiejagencja@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+        window.open(mailtoUrl, '_blank');
+        titleInput.value = '';
+        contentInput.value = '';
+      }
+    });
+  }
 });
