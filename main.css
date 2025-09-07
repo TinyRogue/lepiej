@@ -893,7 +893,7 @@ header {
 
 .footer {
   position: relative;
-  background: url('../assets/footer-background.png') no-repeat center center / cover;
+  background: url('./assets/footer-background.png') no-repeat center center / cover;
   padding: 4rem 2rem;
   margin-top: 1rem;
   min-height: 75vh;
