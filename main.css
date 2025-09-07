@@ -573,19 +573,19 @@ header {
       @media (max-width: 767px) {
         &:nth-child(1) {
           &::before {
-            background: url('../assets/services/ugc.JPG') no-repeat center center / cover;
+            background: url('./assets/services/ugc.JPG') no-repeat center center / cover;
           }
         }
 
         &:nth-child(2) {
           &::before {
-            background: url('../assets/services/shoot-day.JPEG') no-repeat center center / cover;
+            background: url('./assets/services/shoot-day.JPEG') no-repeat center center / cover;
           }
         }
 
         &:nth-child(3) {
           &::before {
-            background: url('../assets/services/graphic-projects.JPG') no-repeat center center / cover;
+            background: url('./assets/services/graphic-projects.JPG') no-repeat center center / cover;
           }
         }
       }
