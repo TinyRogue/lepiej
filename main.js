@@ -1,7 +1,3 @@
-let previousSlide = () => { };
-let nextSlide = () => { };
-
-
 function throttle(fn, delay) {
   let timer = null;
 
@@ -15,31 +11,46 @@ function throttle(fn, delay) {
   };
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+let cleanupFunctions = [];
+
+function initializeMainFunctionality() {
+  cleanupFunctions.forEach(cleanup => cleanup());
+  cleanupFunctions = [];
+  initializeCommonElements();
+  initializePageSpecificElements();
+}
+
+function initializeCommonElements() {
   const hamburger = document.querySelector('.hamburger');
   const overlay = document.querySelector('.fullscreen-overlay');
   const body = document.body;
   const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
 
   if (hamburger && overlay) {
-    hamburger.addEventListener('click', () => {
+    const handleHamburgerClick = () => {
       toggleMenu();
-    });
+    };
+    hamburger.addEventListener('click', handleHamburgerClick);
+    cleanupFunctions.push(() => hamburger.removeEventListener('click', handleHamburgerClick));
   }
 
   mobileNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (overlay.classList.contains('is-active')) {
+    const handleMobileNavClick = () => {
+      if (overlay && overlay.classList.contains('is-active')) {
         toggleMenu();
       }
-    });
+    };
+    link.addEventListener('click', handleMobileNavClick);
+    cleanupFunctions.push(() => link.removeEventListener('click', handleMobileNavClick));
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('is-active')) {
+  const handleKeydown = (e) => {
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('is-active')) {
       toggleMenu();
     }
-  });
+  };
+  document.addEventListener('keydown', handleKeydown);
+  cleanupFunctions.push(() => document.removeEventListener('keydown', handleKeydown));
 
   function toggleMenu() {
     const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
@@ -73,8 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 100 * mobileNavLinks.length + 300);
     }
   }
+}
 
+function initializePageSpecificElements() {
+  initializeWritingAnimation();
+  initializePortfolioCarousel();
+  initializeServicesSection();
+  initializeContactForm();
+  initializeVideos();
+}
+
+function initializeWritingAnimation() {
   const writingElement = document.getElementById('writing-animation');
+  if (!writingElement) return;
   const words = ["Kreatywne Treści", "UGC", "Nagrania", "Grafiki"];
   let wordIndex = 0;
   let letterIndex = 0;
@@ -102,8 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   type();
+}
 
+function initializeServicesSection() {
   const services = document.querySelectorAll('.service-item');
+  if (services.length === 0) return;
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -118,35 +143,55 @@ document.addEventListener('DOMContentLoaded', () => {
   services.forEach(element => {
     observer.observe(element);
   });
+}
 
+function initializePortfolioCarousel() {
   const portfolioSlides = document.querySelectorAll('.slide');
+  if (portfolioSlides.length === 0) return;
 
   previousSlide = () => {
-    carouselTrack.scrollBy({
-      left: -portfolioSlides[0].clientWidth / 2,
-      behavior: 'smooth'
-    });
+    if (carouselTrack && portfolioSlides.length > 0) {
+      carouselTrack.scrollBy({
+        left: -portfolioSlides[0].clientWidth / 2,
+        behavior: 'smooth'
+      });
+    }
   };
 
   nextSlide = () => {
-    carouselTrack.scrollBy({
-      left: portfolioSlides[0].clientWidth / 2,
-      behavior: 'smooth'
-    });
+    if (carouselTrack && portfolioSlides.length > 0) {
+      carouselTrack.scrollBy({
+        left: portfolioSlides[0].clientWidth / 2,
+        behavior: 'smooth'
+      });
+    }
   };
 
   let startX = 0;
   const carousel = document.querySelector('.carousel');
   const carouselTrack = document.querySelector('.carousel-track');
   const slideCaption = document.querySelector('.slide-caption');
-  const firstSlide = document.querySelectorAll('.slide')[0];
-  slideCaption.querySelector('#company-name').textContent = firstSlide.querySelector('figcaption').querySelector('p').textContent;
-  slideCaption.querySelector('#service-description').textContent = firstSlide.querySelector('figcaption').querySelector('p:last-child').textContent;
-  carousel.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
+  const firstSlide = document.querySelector('.slide');
 
-  carousel.addEventListener('touchend', (e) => {
+  if (slideCaption && firstSlide) {
+    const companyNameEl = slideCaption.querySelector('#company-name');
+    const serviceDescEl = slideCaption.querySelector('#service-description');
+    const figcaption = firstSlide.querySelector('figcaption');
+
+    if (companyNameEl && figcaption) {
+      const companyP = figcaption.querySelector('p');
+      if (companyP) companyNameEl.textContent = companyP.textContent;
+    }
+    if (serviceDescEl && figcaption) {
+      const serviceP = figcaption.querySelector('p:last-child');
+      if (serviceP) serviceDescEl.textContent = serviceP.textContent;
+    }
+  }
+  const handleTouchStart = (e) => {
+    startX = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
     const endX = e.changedTouches[0].clientX;
     const deltaX = endX - startX;
     const swipeMargin = Math.abs(deltaX) > 30;
@@ -159,9 +204,20 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       nextSlide();
     }
-  });
+  };
 
-  carouselTrack.addEventListener("scroll", () => {
+  if (carousel) {
+    carousel.addEventListener('touchstart', handleTouchStart);
+    carousel.addEventListener('touchend', handleTouchEnd);
+    cleanupFunctions.push(() => {
+      carousel.removeEventListener('touchstart', handleTouchStart);
+      carousel.removeEventListener('touchend', handleTouchEnd);
+    });
+  }
+
+  const handleCarouselScroll = () => {
+    if (!carouselTrack || !slideCaption) return;
+
     const trackRect = carouselTrack.getBoundingClientRect();
     const trackWidth = trackRect.width;
     const trackCenter = trackWidth / 2;
@@ -176,35 +232,94 @@ document.addEventListener('DOMContentLoaded', () => {
       item.classList.remove('middle');
       if (distanceFromCenter < centerThreshold) {
         item.classList.add('middle');
-        slideCaption.querySelector('#company-name').textContent = item.querySelector('figcaption').querySelector('p').textContent;
-        slideCaption.querySelector('#service-description').textContent = item.querySelector('figcaption').querySelector('p:last-child').textContent;
-        if (item.firstElementChild.tagName === 'VIDEO') {
+        const companyNameEl = slideCaption.querySelector('#company-name');
+        const serviceDescEl = slideCaption.querySelector('#service-description');
+        const figcaption = item.querySelector('figcaption');
+
+        if (companyNameEl && figcaption) {
+          companyNameEl.textContent = figcaption.querySelector('p').textContent;
+        }
+        if (serviceDescEl && figcaption) {
+          serviceDescEl.textContent = figcaption.querySelector('p:last-child').textContent;
+        }
+        if (item.firstElementChild && item.firstElementChild.tagName === 'VIDEO') {
           item.firstElementChild.play();
         }
       }
     }
-  });
+  };
 
+  if (carouselTrack) {
+    carouselTrack.addEventListener("scroll", handleCarouselScroll);
+    cleanupFunctions.push(() => carouselTrack.removeEventListener("scroll", handleCarouselScroll));
+  }
+}
+
+function initializeContactForm() {
   const contactForm = document.getElementById('contact-form');
+  if (!contactForm) return;
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    const titleInput = document.getElementById('form-title');
+    const contentInput = document.getElementById('form-content');
 
-      const titleInput = document.getElementById('form-title');
-      const contentInput = document.getElementById('form-content');
+    const title = titleInput?.value.trim();
+    const content = contentInput?.value.trim();
 
-      const title = titleInput.value.trim();
-      const content = contentInput.value.trim();
+    if (title && content) {
+      const emailSubject = encodeURIComponent(title);
+      const emailBody = encodeURIComponent(content);
+      const mailtoUrl = `mailto:lepiejagencja@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+      window.open(mailtoUrl, '_blank');
+      titleInput.value = '';
+      contentInput.value = '';
+    }
+  };
 
-      if (title && content) {
-        const emailSubject = encodeURIComponent(title);
-        const emailBody = encodeURIComponent(content);
-        const mailtoUrl = `mailto:lepiejagencja@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-        window.open(mailtoUrl, '_blank');
-        titleInput.value = '';
-        contentInput.value = '';
-      }
+  contactForm.addEventListener('submit', handleContactSubmit);
+  cleanupFunctions.push(() => contactForm.removeEventListener('submit', handleContactSubmit));
+}
+
+function initializeVideos() {
+  const videos = document.querySelectorAll('video');
+
+  videos.forEach(video => {
+    if (!video.hasAttribute('muted')) {
+      video.muted = true;
+    }
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const video = entry.target;
+
+          if (video.dataset.src && !video.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
+
+          if (video.hasAttribute('autoplay') || video.hasAttribute('data-autoplay')) {
+            video.play().catch(error => {
+              console.log('Video autoplay failed:', error);
+            });
+          }
+
+          videoObserver.unobserve(video);
+        }
+      });
+    }, {
+      threshold: 0.25
     });
+
+    videoObserver.observe(video);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeMainFunctionality();
+
+  if (typeof addReinitCallback === 'function') {
+    addReinitCallback(initializeMainFunctionality);
   }
 });
