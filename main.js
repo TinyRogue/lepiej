@@ -152,19 +152,37 @@ function initializePortfolioCarousel() {
 
   previousSlide = () => {
     if (carouselTrack && portfolioSlides.length > 0) {
-      carouselTrack.scrollBy({
-        left: -portfolioSlides[0].clientWidth / 2,
-        behavior: 'smooth'
-      });
+      const currentSlide = carouselTrack.querySelector('.slide.middle');
+      if (currentSlide && currentSlide.previousElementSibling) {
+        currentSlide.previousElementSibling.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      } else {
+        carouselTrack.scrollBy({
+          left: -portfolioSlides[0].clientWidth,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
   nextSlide = () => {
     if (carouselTrack && portfolioSlides.length > 0) {
-      carouselTrack.scrollBy({
-        left: portfolioSlides[0].clientWidth / 2,
-        behavior: 'smooth'
-      });
+      const currentSlide = carouselTrack.querySelector('.slide.middle');
+      if (currentSlide && currentSlide.nextElementSibling) {
+        currentSlide.nextElementSibling.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      } else {
+        carouselTrack.scrollBy({
+          left: portfolioSlides[0].clientWidth,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -195,21 +213,22 @@ function initializePortfolioCarousel() {
   const handleTouchEnd = (e) => {
     const endX = e.changedTouches[0].clientX;
     const deltaX = endX - startX;
-    const swipeMargin = Math.abs(deltaX) > 30;
-    if (!swipeMargin) {
-      return;
-    }
+    const swipeMargin = Math.abs(deltaX) > 50;
 
-    if (deltaX > 0) {
-      previousSlide();
-    } else {
-      nextSlide();
+    if (!CSS.supports('scroll-snap-type', 'x mandatory') && swipeMargin) {
+      e.preventDefault();
+
+      if (deltaX > 0) {
+        previousSlide();
+      } else {
+        nextSlide();
+      }
     }
   };
 
-  if (carousel) {
-    carousel.addEventListener('touchstart', handleTouchStart);
-    carousel.addEventListener('touchend', handleTouchEnd);
+  if (carousel && !CSS.supports('scroll-snap-type', 'x mandatory')) {
+    carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+    carousel.addEventListener('touchend', handleTouchEnd, { passive: false });
     cleanupFunctions.push(() => {
       carousel.removeEventListener('touchstart', handleTouchStart);
       carousel.removeEventListener('touchend', handleTouchEnd);
@@ -253,6 +272,19 @@ function initializePortfolioCarousel() {
   if (carouselTrack) {
     carouselTrack.addEventListener("scroll", handleCarouselScroll);
     cleanupFunctions.push(() => carouselTrack.removeEventListener("scroll", handleCarouselScroll));
+
+    // Ensure first slide is initially centered
+    setTimeout(() => {
+      const firstSlide = carouselTrack.querySelector('.slide');
+      if (firstSlide && !carouselTrack.querySelector('.slide.middle')) {
+        firstSlide.scrollIntoView({
+          behavior: 'auto',
+          block: 'nearest',
+          inline: 'center'
+        });
+        handleCarouselScroll();
+      }
+    }, 100);
   }
 }
 

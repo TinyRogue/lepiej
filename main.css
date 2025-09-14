@@ -818,8 +818,28 @@ header {
       scrollbar-width: none;
       -ms-overflow-style: none;
       height: 75vh;
+      min-height: 500px;
+
+      @media (max-width: 768px) {
+        height: 70vh;
+        min-height: 400px;
+        padding-left: calc(50% - (70vh * 9 / 32));
+        padding-right: calc(50% - (70vh * 9 / 32));
+      }
+
+      @media (max-height: 600px) {
+        height: 80vh;
+        min-height: 350px;
+        padding-left: calc(50% - (80vh * 9 / 32));
+        padding-right: calc(50% - (80vh * 9 / 32));
+      }
+
       align-items: center;
       justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      touch-action: manipulation;
+      padding-left: calc(50% - (75vh * 9 / 32));
+      padding-right: calc(50% - (75vh * 9 / 32));
 
       &::-webkit-scrollbar {
         display: none;
@@ -827,6 +847,7 @@ header {
 
       .slide {
         scroll-snap-align: center;
+        scroll-snap-stop: always;
         border-radius: 1.5rem;
         height: 100%;
         aspect-ratio: 9 / 16;
@@ -836,13 +857,6 @@ header {
         position: relative;
         flex-shrink: 0;
 
-        &:first-child {
-          margin-left: 50%;
-        }
-
-        &:last-child {
-          margin-right: 50%;
-        }
 
         img,
         video {
