@@ -92,6 +92,7 @@ function initializePageSpecificElements() {
   initializeServicesSection();
   initializeContactForm();
   initializeVideos();
+  initializeInfiniteLogoCarousel();
 }
 
 function initializeWritingAnimation() {
@@ -314,6 +315,60 @@ function initializeVideos() {
 
     videoObserver.observe(video);
   });
+}
+
+function initializeInfiniteLogoCarousel() {
+  const carouselTrack = document.querySelector('.infinite-carousel-track');
+  if (!carouselTrack) return;
+  let speedFactor = 1.5;
+
+  const originalItems = document.querySelectorAll('.infinite-carousel-item:not(.clone)');
+  if (originalItems.length === 0) return;
+
+  const existingClones = document.querySelectorAll('.infinite-carousel-item.clone');
+  existingClones.forEach(clone => clone.remove());
+
+  carouselTrack.innerHTML = '';
+  const marquee = document.createElement('div');
+  marquee.className = 'logo-marquee';
+  carouselTrack.appendChild(marquee);
+
+  const createItems = () => {
+    const viewportWidth = window.innerWidth;
+    const itemWidth = 150;
+    const itemsPerSet = originalItems.length;
+    const totalItemWidth = itemWidth * itemsPerSet;
+    const setsNeeded = Math.ceil((viewportWidth * 3) / totalItemWidth);
+    for (let i = 0; i < setsNeeded; i++) {
+      originalItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        if (i > 0) clone.classList.add('clone');
+        marquee.appendChild(clone);
+      });
+    }
+  };
+
+  createItems();
+
+  const updateAnimation = () => {
+    const marqueeWidth = marquee.scrollWidth;
+    const basePixelsPerSecond = 80;
+    const pixelsPerSecond = basePixelsPerSecond * speedFactor;
+    const animationDuration = marqueeWidth / pixelsPerSecond;
+    marquee.style.animationDuration = `${Math.max(3, animationDuration)}s`;
+    marquee.style.transform = 'translateX(0)';
+    void marquee.offsetWidth;
+  };
+
+  setTimeout(updateAnimation, 100);
+
+  const handleResize = throttle(() => {
+    createItems();
+    updateAnimation();
+  }, 250);
+
+  window.addEventListener('resize', handleResize);
+  cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

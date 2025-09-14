@@ -34,6 +34,10 @@ const fetchTemplate = async (path) => {
 };
 
 const route = async (path, push = true) => {
+  if (path.startsWith('#')) {
+    return;
+  }
+
   const routePath = routes.has(path) ? path : '/';
 
   if (routePath === '/') {
@@ -47,6 +51,11 @@ const route = async (path, push = true) => {
   }
 
   runReinitCallbacks();
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'instant'
+  });
 
   if (push) {
     window.history.pushState({}, '', path);
@@ -73,7 +82,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('mouseover', prefetchFromDataLink);
 document.addEventListener('focusin', prefetchFromDataLink);
 window.addEventListener('popstate', () => {
-  route(window.location.pathname, false);
+  if (window.location.hash === '' || window.location.pathname !== '/') {
+    route(window.location.pathname, false);
+  }
 });
 
 document.addEventListener("click", (e) => {
