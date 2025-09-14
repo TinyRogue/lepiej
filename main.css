@@ -332,7 +332,7 @@ header {
   justify-content: center;
   align-items: center;
   height: calc(100vh - 4.5rem - 1rem);
-  background-image: url(./assets/hero.JPEG);
+  background-image: url(./assets/home/hero.JPEG);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -602,19 +602,19 @@ header {
       @media (max-width: 767px) {
         &:nth-child(1) {
           &::before {
-            background: url('./assets/services/ugc.JPG') no-repeat center center / cover;
+            background: url('assets/home/ugc.JPG') no-repeat center center / cover;
           }
         }
 
         &:nth-child(2) {
           &::before {
-            background: url('./assets/services/shoot-day.JPEG') no-repeat center center / cover;
+            background: url('assets/home/shoot-day.JPEG') no-repeat center center / cover;
           }
         }
 
         &:nth-child(3) {
           &::before {
-            background: url('./assets/services/graphic-projects.JPG') no-repeat center center / cover;
+            background: url('assets/home/graphic-projects.JPG') no-repeat center center / cover;
           }
         }
       }
@@ -640,19 +640,19 @@ header {
 
         &:nth-child(1) {
           &::before {
-            background: url('../assets/services/ugc.JPG') no-repeat center center / cover;
+            background: url('assets/home/services-ugc.JPG') no-repeat center center / cover;
           }
         }
 
         &:nth-child(2) {
           &::before {
-            background: url('../assets/services/shoot-day.JPEG') no-repeat center center / cover;
+            background: url('assets/home/services-shoot-day.JPEG') no-repeat center center / cover;
           }
         }
 
         &:nth-child(3) {
           &::before {
-            background: url('../assets/services/graphic-projects.JPG') no-repeat center center / cover;
+            background: url('assets/home/services-graphic-projects.JPG') no-repeat center center / cover;
           }
         }
       }
@@ -1009,7 +1009,7 @@ header {
 
 .footer {
   position: relative;
-  background: url('./assets/footer-background.png') no-repeat center center / cover;
+  background: url('assets/footer/bg.png') no-repeat center center / cover;
   padding: 4rem 2rem;
   margin-top: 1rem;
   min-height: 75vh;
