@@ -93,6 +93,7 @@ function initializePageSpecificElements() {
   initializeContactForm();
   initializeVideos();
   initializeInfiniteLogoCarousel();
+  initializeUgcCarousel();
 }
 
 function initializeWritingAnimation() {
@@ -347,6 +348,289 @@ function initializeVideos() {
 
     videoObserver.observe(video);
   });
+}
+
+function readMoreUgcSlideClick() {
+  const figcaptions = document.querySelectorAll('.slide figcaption');
+  const isExpanded = figcaptions[0].classList.contains('expanded');
+
+  if (isExpanded) {
+    figcaptions.forEach(figcaption => figcaption.classList.remove('expanded'));
+  } else {
+    figcaptions.forEach(figcaption => figcaption.classList.add('expanded'));
+  }
+}
+
+function initializeUgcCarousel() {
+  const container = document.querySelector('.ugc-collab');
+  if (!container) return;
+
+  const carousel = container.querySelector('.carousel');
+  const carouselTrack = container.querySelector('.carousel-track');
+  const ugcSlides = container.querySelectorAll('.slide');
+  const nameEl = container.querySelector('#ugc-company-name');
+  const descEl = container.querySelector('#ugc-collab-desc');
+  const soundToggleBtn = container.querySelector('#ugc-sound-toggle');
+  const soundToggleBtnMobile = container.querySelector('#ugc-sound-toggle-mobile');
+  const soundToggleText = soundToggleBtn?.querySelector('.sound-toggle-text');
+
+  if (!carouselTrack || ugcSlides.length === 0) return;
+
+  let currentUnmutedVideo = null;
+  let isSoundEnabled = false;
+  let scrollTimeout = null;
+  let isScrolling = false;
+  let wasPlayingBeforeLeaving = false;
+
+  previousSlide = () => {
+    if (carouselTrack && ugcSlides.length > 0) {
+      const currentSlide = carouselTrack.querySelector('.slide.middle');
+      if (currentSlide && currentSlide.previousElementSibling) {
+        currentSlide.previousElementSibling.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      } else {
+        carouselTrack.scrollBy({
+          left: -ugcSlides[0].clientWidth,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
+  nextSlide = () => {
+    if (carouselTrack && ugcSlides.length > 0) {
+      const currentSlide = carouselTrack.querySelector('.slide.middle');
+      if (currentSlide && currentSlide.nextElementSibling) {
+        currentSlide.nextElementSibling.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      } else {
+        carouselTrack.scrollBy({
+          left: ugcSlides[0].clientWidth,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
+  const muteAllVideos = () => {
+    ugcSlides.forEach(slide => {
+      const video = slide.querySelector('video');
+      if (video) {
+        video.muted = true;
+      }
+    });
+    currentUnmutedVideo = null;
+  };
+
+  const toggleSound = () => {
+    const middleSlide = carouselTrack.querySelector('.slide.middle');
+    const video = middleSlide?.querySelector('video');
+
+    if (!video) return;
+
+    isSoundEnabled = !isSoundEnabled;
+
+    if (isSoundEnabled) {
+      muteAllVideos();
+      video.muted = false;
+      currentUnmutedVideo = video;
+      soundToggleBtn?.classList.add('sound-active');
+      soundToggleBtnMobile?.classList.add('sound-active');
+      if (soundToggleText) {
+        soundToggleText.textContent = 'Wyłącz dźwięk';
+      }
+      video.play().catch(error => {
+        console.log('Video play failed:', error);
+      });
+      wasPlayingBeforeLeaving = false;
+    } else {
+      muteAllVideos();
+      soundToggleBtn?.classList.remove('sound-active');
+      soundToggleBtnMobile?.classList.remove('sound-active');
+      if (soundToggleText) {
+        soundToggleText.textContent = 'Włącz dźwięk';
+      }
+      wasPlayingBeforeLeaving = false;
+    }
+  };
+
+  const updateTextFrom = (slide) => {
+    const figcaption = slide.querySelector('figcaption');
+    if (!figcaption) return;
+
+    const companyP = figcaption.querySelector('p:nth-of-type(1)');
+    const descP = figcaption.querySelector('p:nth-of-type(2)');
+
+    if (nameEl && companyP) {
+      nameEl.textContent = companyP.textContent;
+    }
+    if (descEl && descP) {
+      descEl.textContent = descP.textContent;
+    }
+
+    // Start playing video immediately
+    const video = slide.querySelector('video');
+    if (video && video.play) {
+      video.play().catch(error => {
+        console.log('Video autoplay failed:', error);
+      });
+    }
+  };
+
+  const updateSoundFrom = (slide) => {
+    const video = slide.querySelector('video');
+    if (video && isSoundEnabled && !isScrolling) {
+      muteAllVideos();
+      video.muted = false;
+      currentUnmutedVideo = video;
+    }
+  };
+
+  const updateInfoFrom = (slide) => {
+    updateTextFrom(slide);
+    updateSoundFrom(slide);
+  };
+
+  const handleCarouselScroll = () => {
+    if (!carouselTrack) return;
+
+    // Detect scroll start - mute sound during scrolling
+    if (!isScrolling && isSoundEnabled) {
+      isScrolling = true;
+      muteAllVideos();
+    }
+
+    // Clear previous timeout
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+
+    const trackRect = carouselTrack.getBoundingClientRect();
+    const trackWidth = trackRect.width;
+    const trackCenter = trackWidth / 2;
+
+    for (const item of ugcSlides) {
+      const itemRect = item.getBoundingClientRect();
+      const trackRectLeft = trackRect.left;
+      const itemCenter = itemRect.left + itemRect.width / 2 - trackRectLeft;
+      const distanceFromCenter = Math.abs(itemCenter - trackCenter);
+      const centerThreshold = itemRect.width * 0.5;
+
+      item.classList.remove('middle');
+      if (distanceFromCenter < centerThreshold) {
+        item.classList.add('middle');
+
+        // Update text immediately
+        updateTextFrom(item);
+
+        // Set timeout to detect when scrolling stops and update sound
+        scrollTimeout = setTimeout(() => {
+          isScrolling = false;
+          updateSoundFrom(item);
+        }, 50);
+      }
+    }
+  };
+
+  let startX = 0;
+  const handleTouchStart = (e) => {
+    startX = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const deltaX = endX - startX;
+    const swipeMargin = Math.abs(deltaX) > 50;
+
+    if (!CSS.supports('scroll-snap-type', 'x mandatory') && swipeMargin) {
+      e.preventDefault();
+      if (deltaX > 0) {
+        previousSlide();
+      } else {
+        nextSlide();
+      }
+    }
+  };
+
+  if (carousel && !CSS.supports('scroll-snap-type', 'x mandatory')) {
+    carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+    carousel.addEventListener('touchend', handleTouchEnd, { passive: false });
+    cleanupFunctions.push(() => {
+      carousel.removeEventListener('touchstart', handleTouchStart);
+      carousel.removeEventListener('touchend', handleTouchEnd);
+    });
+  }
+
+  carouselTrack.addEventListener('scroll', handleCarouselScroll);
+  cleanupFunctions.push(() => {
+    carouselTrack.removeEventListener('scroll', handleCarouselScroll);
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+  });
+
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', toggleSound);
+    cleanupFunctions.push(() => soundToggleBtn.removeEventListener('click', toggleSound));
+  }
+
+  if (soundToggleBtnMobile) {
+    soundToggleBtnMobile.addEventListener('click', toggleSound);
+    cleanupFunctions.push(() => soundToggleBtnMobile.removeEventListener('click', toggleSound));
+  }
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        if (isSoundEnabled) {
+          wasPlayingBeforeLeaving = true;
+          muteAllVideos();
+        }
+      } else {
+        if (wasPlayingBeforeLeaving && isSoundEnabled) {
+          const middleSlide = carouselTrack.querySelector('.slide.middle');
+          if (middleSlide) {
+            const video = middleSlide.querySelector('video');
+            if (video) {
+              video.muted = false;
+              currentUnmutedVideo = video;
+              video.play().catch(error => {
+                console.log('Video play failed:', error);
+              });
+            }
+          }
+        }
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '-10% 0px -10% 0px'
+  });
+
+  sectionObserver.observe(container);
+  cleanupFunctions.push(() => sectionObserver.disconnect());
+
+  setTimeout(() => {
+    const middleSlide = carouselTrack.querySelector('.slide.middle');
+    const firstSlide = carouselTrack.querySelector('.slide');
+
+    if (middleSlide) {
+      updateInfoFrom(middleSlide);
+    } else if (firstSlide) {
+      firstSlide.scrollIntoView({
+        behavior: 'auto',
+        block: 'nearest',
+        inline: 'center'
+      });
+      handleCarouselScroll();
+    }
+  }, 100);
 }
 
 function initializeInfiniteLogoCarousel() {

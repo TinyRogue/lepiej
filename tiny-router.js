@@ -1,5 +1,6 @@
 const routes = new Map([
   ['/about-me', 'subpages/about-me.html'],
+  ['/ugc', 'subpages/ugc.html'],
 ]);
 
 const cache = new Map();
@@ -74,16 +75,19 @@ function prefetchFromDataLink(e) {
 document.addEventListener('DOMContentLoaded', async () => {
   cache.set('/', routerOutlet.innerHTML);
 
-  if (window.location.pathname !== '/') {
-    route(window.location.pathname, false);
+  const initialPath = window.location.pathname;
+  if (initialPath !== '/' && initialPath !== '/index.html') {
+    await route(initialPath, false);
   }
 });
 
 document.addEventListener('mouseover', prefetchFromDataLink);
 document.addEventListener('focusin', prefetchFromDataLink);
+
 window.addEventListener('popstate', () => {
-  if (window.location.hash === '' || window.location.pathname !== '/') {
-    route(window.location.pathname, false);
+  const currentPath = window.location.pathname;
+  if (window.location.hash === '' || currentPath !== '/') {
+    route(currentPath, false);
   }
 });
 
