@@ -15,6 +15,22 @@
   --serif-font: 'Old Standard TT', "Times New Roman", Georgia, "Palatino Linotype", Palatino, serif;
 }
 
+/* Skip to main content link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: var(--white);
+  padding: 8px;
+  text-decoration: none;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 .primary {
   color: var(--primary);
 }
@@ -120,6 +136,17 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+}
+
+/* Font display optimization */
+@font-face {
+  font-family: 'Raleway';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Old Standard TT';
+  font-display: swap;
 }
 
 body {

@@ -1,0 +1,11 @@
+<section class="collaborations">
+  <p>To nie lista. <span class="i">To historia.</span></p>
+  <p>Zobacz, kto ju poszedł z nami w kreatywną stronę.</p>
+  <div class="infinite-carousel-track">
+    {{ range $.Site.Data.collaborations }}
+    <a href="{{ .url }}" class="infinite-carousel-item" target="_blank" rel="noopener noreferrer">
+      <img src="{{ .logo | relURL }}" alt="{{ .alt }}" loading="lazy">
+    </a>
+    {{ end }}
+  </div>
+</section>

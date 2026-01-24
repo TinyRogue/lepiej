@@ -687,6 +687,47 @@ function initializeInfiniteLogoCarousel() {
   cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 }
 
+// Event delegation for data-action attributes
+function setupActionHandlers() {
+  document.addEventListener('click', (e) => {
+    const action = e.target.closest('[data-action]')?.getAttribute('data-action');
+    if (!action) return;
+
+    switch (action) {
+      case 'previous-slide':
+        e.preventDefault();
+        if (typeof previousSlide === 'function') {
+          previousSlide();
+        }
+        break;
+      case 'next-slide':
+        e.preventDefault();
+        if (typeof nextSlide === 'function') {
+          nextSlide();
+        }
+        break;
+      case 'read-more-ugc':
+        e.preventDefault();
+        if (typeof readMoreUgcSlideClick === 'function') {
+          readMoreUgcSlideClick();
+        }
+        break;
+    }
+  });
+
+  // Handle keyboard events for read-more-ugc (accessibility)
+  document.addEventListener('keydown', (e) => {
+    const target = e.target;
+    if (target.matches('[data-action="read-more-ugc"]') && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      if (typeof readMoreUgcSlideClick === 'function') {
+        readMoreUgcSlideClick();
+      }
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initializeMainFunctionality();
+  setupActionHandlers();
 });

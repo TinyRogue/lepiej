@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Bandi",
+    "url": "https://bandi.pl",
+    "logo": "/assets/footer/collaborations/bandi-logo.png",
+    "alt": "Bandi Logo"
+  },
+  {
+    "name": "Delive Studios",
+    "url": "https://delivestudios.pl/",
+    "logo": "/assets/footer/collaborations/delive-studios-logo.png",
+    "alt": "Delive Studios Logo"
+  },
+  {
+    "name": "Exbud",
+    "url": "https://exbud.pl",
+    "logo": "/assets/footer/collaborations/exbud-logo.png",
+    "alt": "Exbud Logo"
+  },
+  {
+    "name": "Make Me Bio",
+    "url": "https://eu.makemebio.com/",
+    "logo": "/assets/footer/collaborations/make-me-bio-logo.png",
+    "alt": "Make Me Bio Logo"
+  },
+  {
+    "name": "Pawlowska Beauty",
+    "url": "https://booksy.com/pl-pl/dl/show-business/101811",
+    "logo": "/assets/footer/collaborations/pawlowska-beauty-logo.svg",
+    "alt": "Pawlowska Beauty Logo"
+  },
+  {
+    "name": "Say Loca",
+    "url": "https://sayloca.pl/",
+    "logo": "/assets/footer/collaborations/say-loca-logo.png",
+    "alt": "Say Loca Logo"
+  },
+  {
+    "name": "Si Senor",
+    "url": "https://sisenor.pl/",
+    "logo": "/assets/footer/collaborations/si-senor-logo.png",
+    "alt": "Si Senor Logo"
+  }
+]

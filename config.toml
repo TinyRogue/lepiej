@@ -1,6 +1,15 @@
 baseURL = "https://lepiej.com"
 languageCode = "pl-PL"
 title = "Lepiej."
+publishDir = "public"
+buildDrafts = false
+buildFuture = false
+enableRobotsTXT = true
+enableGitInfo = false
+
+[permalinks]
+  about-me = "/about-me/"
+  ugc = "/ugc/"
 
 [params]
   description = "Lepiej. is a company that helps brands grow through social media. We create UGC, illustrations, design, branding, marketing, and audits."
@@ -8,9 +17,10 @@ title = "Lepiej."
   author = "Lepiej Team"
   themeColor = "#98B4D4"
 
-[permalinks]
-  about-me = "/about-me/"
-  ugc = "/ugc/"
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
 
 [markup]
   [markup.goldmark]

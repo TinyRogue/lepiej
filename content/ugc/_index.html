@@ -1,5 +1,7 @@
 ---
 title: "UGC"
+description: "Autentyczne treści od twórców - angażujące filmy UGC, które rozwijają marki online."
+date: 2024-01-01
 ---
 
 <div class="subpage-ugc">
@@ -8,7 +10,7 @@ title: "UGC"
   <div class="ugc-hero-video">
     <video autoplay muted loop playsinline webkit-playsinline
       controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-      src="/assets/home/portfolio-3-social-media-personal.mp4">
+      src="/assets/home/portfolio-3-social-media-personal.mp4" preload="none">
     </video>
     <div class="overlay">
       <h3>Lorem ipsum dolor</h3>
@@ -44,14 +46,14 @@ title: "UGC"
               <span class="sound-toggle-text">Lepiej z dźwiękiem</span>
             </button>
             <div class="carousel-controls">
-              <button onclick="previousSlide()" type="button" aria-label="Previous slide">
+              <button data-action="previous-slide" type="button" aria-label="Previous slide">
                 <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M7.53033 1.53033C7.82322 1.23744 7.82322 0.762563 7.53033 0.46967C7.23744 0.176777 6.76256 0.176777 6.46967 0.46967L0.46967 6.46967C0.176777 6.76256 0.176777 7.23744 0.46967 7.53033L6.46967 13.5303C6.76256 13.8232 7.23744 13.8232 7.53033 13.5303C7.82322 13.2374 7.82322 12.7626 7.53033 12.4697L2.81066 7.75H15C15.4142 7.75 15.75 7.41421 15.75 7C15.75 6.58579 15.4142 6.25 15 6.25H2.81066L7.53033 1.53033Z"
                     fill="currentColor" />
                 </svg>
               </button>
-              <button onclick="nextSlide()" type="button" aria-label="Next slide">
+              <button data-action="next-slide" type="button" aria-label="Next slide">
                 <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967C8.17678 0.762563 8.17678 1.23744 8.46967 1.53033L13.1893 6.25H1C0.585786 6.25 0.25 6.58579 0.25 7C0.25 7.41421 0.585786 7.75 1 7.75H13.1893L8.46967 12.4697C8.17678 12.7626 8.17678 13.2374 8.46967 13.5303C8.76256 13.8232 9.23744 13.8232 9.53033 13.5303L15.5303 7.53033C15.8232 7.23744 15.8232 6.76256 15.5303 6.46967L9.53033 0.46967Z"
@@ -68,9 +70,9 @@ title: "UGC"
           <div class="carousel-track">
             <figure class="slide middle">
               <video src="/assets/subpages/ugc/make-me-bio-tonic.MOV" muted loop playsinline webkit-playsinline
-                alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Make Me Bio</strong></p>
                 <p>
                   Filmy stworzone dla Make Me Bio to połączenie naturalnego piękna i subtelnej elegancji. Skupiłam się
@@ -85,9 +87,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/make-me-bio-serum.MOV" muted loop playsinline webkit-playsinline
-                alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Make Me Bio</strong></p>
                 <p>
                   Filmy stworzone dla Make Me Bio to połączenie naturalnego piękna i subtelnej elegancji. Skupiłam się
@@ -102,9 +104,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/make-me-bio-serum-usage.MOV" muted loop playsinline webkit-playsinline
-                alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Make Me Bio</strong></p>
                 <p>
                   Filmy stworzone dla Make Me Bio to połączenie naturalnego piękna i subtelnej elegancji. Skupiłam się
@@ -119,9 +121,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/bandi-tonic.MOV" muted loop playsinline webkit-playsinline alt="Bandi UGC"
-                controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Bandi</strong></p>
                 <p>
                   Bandi w moich produkcjach to opowieść o materii — kremach, balsamach, esencjach — które żyją,
@@ -135,9 +137,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/bandi-products.MOV" muted loop playsinline webkit-playsinline
-                alt="Bandi UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Bandi UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Bandi</strong></p>
                 <p>
                   Bandi w moich produkcjach to opowieść o materii — kremach, balsamach, esencjach — które żyją,
@@ -151,9 +153,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/bandi-concentrate.MOV" muted loop playsinline webkit-playsinline
-                alt="Bandi UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Bandi UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Bandi</strong></p>
                 <p>
                   Bandi w moich produkcjach to opowieść o materii — kremach, balsamach, esencjach — które żyją,
@@ -167,9 +169,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/say-loca-1.MOV" muted loop playsinline webkit-playsinline
-                alt="Say Loca UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Say Loca UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Say Loca</strong></p>
                 <p>
                   Dla marki Say Loca stworzyłam materiały, w których główną rolę grają nieziemsko błyszczące sukienki —
@@ -183,9 +185,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/say-loca-2.MOV" muted loop playsinline webkit-playsinline
-                alt="Say Loca UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Say Loca UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Say Loca</strong></p>
                 <p>
                   Dla marki Say Loca stworzyłam materiały, w których główną rolę grają nieziemsko błyszczące sukienki —
@@ -199,9 +201,9 @@ title: "UGC"
 
             <figure class="slide">
               <video src="/assets/subpages/ugc/say-loca-3.MOV" muted loop playsinline webkit-playsinline
-                alt="Say Loca UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+                alt="Say Loca UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
               </video>
-              <figcaption onclick="readMoreUgcSlideClick()">
+              <figcaption data-action="read-more-ugc" role="button" tabindex="0" aria-label="Read more">
                 <p><strong>Say Loca</strong></p>
                 <p>
                   Dla marki Say Loca stworzyłam materiały, w których główną rolę grają nieziemsko błyszczące sukienki —
@@ -233,14 +235,14 @@ title: "UGC"
               </svg>
             </button>
             <div class="carousel-nav-buttons">
-              <button onclick="previousSlide()" type="button">
+              <button data-action="previous-slide" type="button" aria-label="Previous slide">
                 <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M7.53033 1.53033C7.82322 1.23744 7.82322 0.762563 7.53033 0.46967C7.23744 0.176777 6.76256 0.176777 6.46967 0.46967L0.46967 6.46967C0.176777 6.76256 0.176777 7.23744 0.46967 7.53033L6.46967 13.5303C6.76256 13.8232 7.23744 13.8232 7.53033 13.5303C7.82322 13.2374 7.82322 12.7626 7.53033 12.4697L2.81066 7.75H15C15.4142 7.75 15.75 7.41421 15.75 7C15.75 6.58579 15.4142 6.25 15 6.25H2.81066L7.53033 1.53033Z"
                     fill="black" />
                 </svg>
               </button>
-              <button onclick="nextSlide()" type="button">
+              <button data-action="next-slide" type="button" aria-label="Next slide">
                 <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967C8.17678 0.762563 8.17678 1.23744 8.46967 1.53033L13.1893 6.25H1C0.585786 6.25 0.25 6.58579 0.25 7C0.25 7.41421 0.585786 7.75 1 7.75H13.1893L8.46967 12.4697C8.17678 12.7626 8.17678 13.2374 8.46967 13.5303C8.76256 13.8232 9.23744 13.8232 9.53033 13.5303L15.5303 7.53033C15.8232 7.23744 15.8232 6.76256 15.5303 6.46967L9.53033 0.46967Z"

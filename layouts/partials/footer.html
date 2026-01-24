@@ -1,0 +1,39 @@
+<footer id="contact" class="footer">
+  <div class="footer-cta">
+    <div class="footer-top">
+      <div class="footer-left">
+        <div class="contact-form-section">
+          <form class="contact-form" id="contact-form">
+            <div class="contact-form-field">
+              <label for="form-title">Tytuł wiadomości</label>
+              <input type="text" placeholder="Hej!" class="form-input" id="form-title" required>
+            </div>
+            <div class="contact-form-field">
+              <label for="form-content">Treść</label>
+              <textarea placeholder="Chcemy UGC!" class="form-textarea" id="form-content" rows="4"
+                required></textarea>
+            </div>
+            <button type="submit" class="button-cta">Wyślij maila</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="contact-section">
+          <h2>Kontakt</h2>
+          <div class="contact-info">
+            <a href="mailto:lepiejagencja@gmail.com" class="contact-item email">
+              <span>lepiejagencja@gmail.com</span>
+            </a>
+          </div>
+        </div>
+
+        {{ partial "social-links.html" . }}
+
+        <div class="footer-logo">
+          <img src="{{ "/assets/utility/logo.svg" | relURL }}" alt="Lepiej. Logo" width="120" height="32">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
