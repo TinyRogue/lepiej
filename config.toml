@@ -1,0 +1,19 @@
+baseURL = "https://lepiej.com"
+languageCode = "pl-PL"
+title = "Lepiej."
+
+[params]
+  description = "Lepiej. is a company that helps brands grow through social media. We create UGC, illustrations, design, branding, marketing, and audits."
+  keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
+  author = "Lepiej Team"
+  themeColor = "#98B4D4"
+
+[permalinks]
+  about-me = "/about-me/"
+  ugc = "/ugc/"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+

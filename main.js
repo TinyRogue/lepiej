@@ -689,8 +689,4 @@ function initializeInfiniteLogoCarousel() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeMainFunctionality();
-
-  if (typeof addReinitCallback === 'function') {
-    addReinitCallback(initializeMainFunctionality);
-  }
 });

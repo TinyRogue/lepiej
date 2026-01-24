@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ "/main.css" | relURL }}">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="keywords" content="{{ .Site.Params.keywords }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="{{ .Site.Params.themeColor }}">
+</head>
+
+<body>
+  <header>
+    <nav class="main-nav">
+      <div class="nav-left">
+        <a href="{{ if .IsHome }}#about{{ else }}/#about{{ end }}" class="pill">O mnie</a>
+        <a href="{{ if .IsHome }}#services{{ else }}/#services{{ end }}" class="pill">Oferta</a>
+      </div>
+      <a href="{{ "/" | relURL }}" class="logo">
+        <img src="{{ "/assets/utility/logo.svg" | relURL }}" alt="Lepiej. logo" />
+      </a>
+      <div class="nav-right">
+        <a href="{{ if .IsHome }}#portfolio{{ else }}/#portfolio{{ end }}" class="pill">Portfolio</a>
+        <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}" class="pill">Kontakt</a>
+      </div>
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </button>
+    </nav>
+  </header>
+  <div class="fullscreen-overlay">
+    <nav class="mobile-nav">
+      <a href="{{ if .IsHome }}#about{{ else }}/#about{{ end }}">O mnie</a>
+      <a href="{{ if .IsHome }}#offer{{ else }}/#offer{{ end }}">Oferta</a>
+      <a href="{{ if .IsHome }}#portfolio{{ else }}/#portfolio{{ end }}">Portfolio</a>
+      <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}">Kontakt</a>
+      <div class="dot"></div>
+    </nav>
+  </div>
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <section class="collaborations">
+    <p>To nie lista. <span class="i">To historia.</span></p>
+    <p>Zobacz, kto ju poszedł z nami w kreatywną stronę.</p>
+    <div class="infinite-carousel-track">
+      <a href="https://bandi.pl" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/bandi-logo.png" | relURL }}" alt="Bandi Logo">
+      </a>
+      <a href="https://delivestudios.pl/" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/delive-studios-logo.png" | relURL }}" alt="Delive Studios Logo">
+      </a>
+      <a href="https://exbud.pl" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/exbud-logo.png" | relURL }}" alt="Exbud Logo">
+      </a>
+      <a href="https://eu.makemebio.com/" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/make-me-bio-logo.png" | relURL }}" alt="Make Me Bio Logo">
+      </a>
+      <a href="https://booksy.com/pl-pl/dl/show-business/101811" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/pawlowska-beauty-logo.svg" | relURL }}" alt="Pawlowska Beauty Logo">
+      </a>
+      <a href="https://sayloca.pl/" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/say-loca-logo.png" | relURL }}" alt="Say Loca Logo">
+      </a>
+      <a href="https://sisenor.pl/" class="infinite-carousel-item" target="_blank">
+        <img src="{{ "/assets/footer/collaborations/si-senor-logo.png" | relURL }}" alt="Si Senor Logo">
+      </a>
+    </div>
+  </section>
+
+  <footer id="contact" class="footer">
+    <div class="footer-cta">
+      <div class="footer-top">
+        <div class="footer-left">
+          <div class="contact-form-section">
+            <form class="contact-form" id="contact-form">
+              <div class="contact-form-field">
+                <label for="form-title">Tytuł wiadomości</label>
+                <input type="text" placeholder="Hej!" class="form-input" id="form-title" required>
+              </div>
+              <div class="contact-form-field">
+                <label for="form-content">Treść</label>
+                <textarea placeholder="Chcemy UGC!" class="form-textarea" id="form-content" rows="4"
+                  required></textarea>
+              </div>
+              <button type="submit" class="button-cta">Wyślij maila</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <div class="contact-section">
+            <h2>Kontakt</h2>
+            <div class="contact-info">
+              <a href="mailto:lepiejagencja@gmail.com" class="contact-item email">
+                <span>lepiejagencja@gmail.com</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="social-section">
+            <div class="social-links">
+              <a href="https://www.instagram.com/lepiej.agencja/" target="_blank" class="social-link instagram"
+                aria-label="Instagram">
+                <img src="{{ "/assets/utility/instagram.png" | relURL }}" alt="Instagram">
+              </a>
+              <a href="https://www.tiktok.com/@lepiej.socialmedia" target="_blank" class="social-link tiktok"
+                aria-label="TikTok">
+                <img src="{{ "/assets/utility/tik-tok.png" | relURL }}" alt="TikTok">
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-logo">
+            <img src="{{ "/assets/utility/logo.svg" | relURL }}" alt="Lepiej. Logo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ "/main.js" | relURL }}"></script>
+</body>
+
+</html>
