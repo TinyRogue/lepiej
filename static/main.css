@@ -1244,6 +1244,9 @@ header {
 
 .subpage-about-me {
   margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .intro {
     display: flex;
@@ -1350,36 +1353,68 @@ header {
   }
 
   .who-is-this-girl {
-    margin-top: 6rem;
-    padding: 0 1rem;
+    margin-top: 3rem;
+    padding: 2rem 1rem;
     position: relative;
+    overflow-x: hidden;
 
     .who-is-this-girl-text {
       text-align: center;
       margin-bottom: 3rem;
-      font-size: 6rem;
+      font-size: 4rem;
       position: absolute;
       white-space: nowrap;
-      left: 50%;
+      width: 100%;
+      height: 4rem;
+      left: 0;
 
-      #who, #that, #girl {
-        position: absolute;
+      @media (min-width: 768px) {
+        left: 50%;
+        height: 6rem;
+        font-size: 6rem;
+        transform: translateY(-25%);
       }
 
-      #who {
-        left: -100px;
-        top: 0;
-      }
-
-      #that {
-        top: 74px;
-        left: 66px;
-      }
-
+      #who,
+      #that,
       #girl {
-        font-size: 8rem;
-        top: -20px;
-        left: 235px;
+        position: absolute;
+        left: 50%;
+        z-index: 10;
+      }
+
+      @media (max-width: 767px) {
+        #who {
+          top: -3rem;
+          transform: translateX(-75%);
+        }
+
+        #that {
+          transform: translate(70%, 150px);
+        }
+
+        #girl {
+          transform: translate(-145%, calc(400px - 3.5rem));
+        }
+      }
+
+      @media (min-width: 768px) {
+
+        #who {
+          left: -100px;
+          top: 0;
+        }
+
+        #that {
+          top: 74px;
+          left: 66px;
+        }
+
+        #girl {
+          font-size: 8rem;
+          top: -20px;
+          left: 235px;
+        }
       }
     }
 
@@ -1387,33 +1422,71 @@ header {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 1rem;
 
       @media (min-width: 768px) {
         flex-direction: row;
         gap: 3rem;
       }
 
-      img {
-        width: 300px;
-        height: 400px;
-        object-fit: cover;
-        border-radius: 1rem;
+      .who-is-this-girl-image {
+        position: relative;
 
-        @media (min-width: 768px) {
-          width: 350px;
-          height: 450px;
+        img {
+          width: 300px;
+          height: 400px;
+          object-fit: cover;
+          border-radius: 1rem;
+
+          @media (min-width: 768px) {
+            width: 350px;
+            height: 450px;
+          }
+        }
+
+        .who-is-this-girl-instagram {
+          position: absolute;
+          bottom: 3rem;
+          left: 0;
+          width: 32px;
+          height: 32px;
+          background: linear-gradient(var(--primary), var(--primary));
+          height: 192px;
+          width: 32px;
+          transform: translateX(-50%);
+          border-radius: 8px;
+          display: flex;
+          justify-content: center;
+          align-items: end;
+          padding-bottom: 0.5rem;
+          cursor: pointer;
+
+          &:hover,
+          &:focus {
+            background: linear-gradient(var(--primary-dark), var(--secondary));
+          }
+
+          img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+          }
         }
       }
 
       .who-is-this-girl-content {
-        margin-top: 176px;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
         flex: 1;
+        margin-top: 48px;
+
+        @media (min-width: 768px) {
+          margin-top: 176px;
+        }
 
         h6 {
           font-size: 1.2rem;
@@ -1430,24 +1503,104 @@ header {
   }
 
   .expansion {
-    margin-top: 6rem;
-    padding: 3rem 1rem;
+    padding: 1.5rem 1rem;
     background-color: var(--light-gray);
     border-radius: 2rem;
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    @media (min-width: 768px) {
+      margin-top: 24px;
+    }
 
     p {
-      margin: 0 0 1.5rem 0;
+      margin: 0 0.5rem 1.5rem 0.5rem;
       line-height: 1.7;
       text-align: justify;
+      max-width: none;
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: end;
 
       &:last-child {
         margin-bottom: 0;
         text-align: right;
         font-weight: 600;
         font-size: 1.1rem;
+      }
+    }
+  }
+
+  .photos-grid {
+    position: relative;
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    >div {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .photos-grid-content {
+      grid-column: 1 / -1;
+      position: sticky;
+      top: 4rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.28);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(3.5px);
+      -webkit-backdrop-filter: blur(3.5px);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      margin: 1rem 0;
+      text-align: center;
+
+      p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+      }
+
+      li {
+        margin: 0.5rem 0;
+        line-height: 1.6;
+      }
+
+      @media (min-width: 768px) {
+        grid-column: 2 / 4;
+        padding: 2rem 4rem;
       }
     }
   }
