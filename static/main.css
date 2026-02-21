@@ -2148,10 +2148,48 @@ header {
   .collaboration-plan {
     display: grid;
     grid-template-columns: 1fr;
-    margin-top: 2rem;
+    margin-top: 4rem;
+    padding: 0 2rem;
 
     @media (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
+      padding: 0 4rem;
+    }
+
+    .collaboration-photo-collage {
+      position: relative;
+      min-height: 500px;
+      overflow: visible;
+
+      img {
+        position: absolute;
+        object-fit: cover;
+      }
+
+      .collage-main {
+        width: 280px;
+        height: 350px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
+
+      .collage-top {
+        width: 100px;
+        height: 140px;
+        top: 20px;
+        left: calc(50% - 135px);
+        z-index: 2;
+      }
+
+      .collage-bottom {
+        width: 100px;
+        height: 160px;
+        top: 120px;
+        left: calc(50% - 190px);
+        z-index: 3;
+      }
     }
 
 
