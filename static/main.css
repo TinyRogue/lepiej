@@ -1455,7 +1455,7 @@ header {
           left: 0;
           width: 32px;
           height: 32px;
-          background: linear-gradient(var(--primary), var(--primary));
+          background: var(--primary);
           height: 192px;
           width: 32px;
           transform: translateX(-50%);
@@ -1472,10 +1472,9 @@ header {
           }
 
           img {
-            width: 16px;
+            width: 24px;
             height: 16px;
             object-fit: contain;
-            filter: brightness(0) invert(1);
           }
         }
       }
