@@ -2406,6 +2406,12 @@ header {
       width: 100%;
       color: var(--white);
       padding-left: 3rem;
+      cursor: default;
+
+      &:hover {
+        color: var(--primary);
+        border-bottom: 1px solid var(--primary);
+      }
     }
   }
 }
