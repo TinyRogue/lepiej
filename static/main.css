@@ -2254,6 +2254,8 @@ header {
         background: transparent;
         border: 2px solid var(--primary);
         color: var(--primary);
+        padding: 0.75em 1.5em;
+        font-size: 0.875rem;
       }
     }
 
