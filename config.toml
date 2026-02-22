@@ -10,6 +10,9 @@ enableGitInfo = false
 [permalinks]
   about-me = "/about-me/"
   ugc = "/ugc/"
+  content-day = "/content-day/"
+  graphic-designs = "/graphic-designs/"
+
 
 [params]
   description = "Lepiej. is a company that helps brands grow through social media. We create UGC, illustrations, design, branding, marketing, and audits."
