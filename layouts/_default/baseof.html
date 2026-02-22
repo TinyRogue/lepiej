@@ -67,6 +67,9 @@
   {{ partial "collaborations.html" . }}
   {{ partial "footer.html" . }}
 
+  {{ if eq .Section "graphic-designs" }}
+  <script src="{{ "/graphic-designs.js" | relURL }}"></script>
+  {{ end }}
   <script src="{{ "/main.js" | relURL }}"></script>
 </body>
 
