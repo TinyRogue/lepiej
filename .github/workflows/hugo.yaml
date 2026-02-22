@@ -89,6 +89,9 @@ jobs:
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+      - name: Copy CNAME file
+        run: |
+          cp CNAME ./public/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
