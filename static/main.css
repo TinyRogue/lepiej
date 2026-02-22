@@ -11,6 +11,8 @@
   --white: #fff;
   --white-rgb: 255, 255, 255;
 
+  --cream: #F6F7F2;
+
   --sans-font: 'Raleway', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --serif-font: 'Old Standard TT', "Times New Roman", Georgia, "Palatino Linotype", Palatino, serif;
 }
@@ -2089,8 +2091,6 @@ header {
         }
       }
 
-
-
       .carousel-track {
         .slide {
           figcaption {
@@ -2147,6 +2147,139 @@ header {
           }
         }
       }
+    }
+  }
+
+  .collab-photos {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 2rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .collab-photos-carousel-wrapper {
+      display: contents;
+    }
+
+    .collab-photos-carousel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      max-height: 80vh;
+    }
+
+    .collab-photos-slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .collab-photos-slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .collab-photos-dots {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      label {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: rgba(var(--white-rgb), 0.5);
+        cursor: pointer;
+      }
+    }
+
+    input#slide1:checked~.collab-photos-carousel .collab-photos-slides {
+      transform: translateX(0);
+    }
+
+    input#slide2:checked~.collab-photos-carousel .collab-photos-slides {
+      transform: translateX(-100%);
+    }
+
+    input#slide3:checked~.collab-photos-carousel .collab-photos-slides {
+      transform: translateX(-200%);
+    }
+
+    input#slide4:checked~.collab-photos-carousel .collab-photos-slides {
+      transform: translateX(-300%);
+    }
+
+    input#slide5:checked~.collab-photos-carousel .collab-photos-slides {
+      transform: translateX(-400%);
+    }
+
+    input#slide1:checked~.collab-photos-carousel .collab-photos-dots label[for="slide1"],
+    input#slide2:checked~.collab-photos-carousel .collab-photos-dots label[for="slide2"],
+    input#slide3:checked~.collab-photos-carousel .collab-photos-dots label[for="slide3"],
+    input#slide4:checked~.collab-photos-carousel .collab-photos-dots label[for="slide4"],
+    input#slide5:checked~.collab-photos-carousel .collab-photos-dots label[for="slide5"] {
+      background: var(--primary);
+    }
+
+    .right-cell {
+      height: 100%;
+      color: var(--black);
+      transition: background 0.5s ease;
+    }
+
+    .right-cell .collab-photos-content {
+      display: none;
+      height: 100%;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      gap: 1rem;
+
+      .button-cta {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+    }
+
+    input#slide1:checked~.right-cell .collab-photos-content1 {
+      display: flex;
+      background: #1abc9c;
+    }
+
+    input#slide2:checked~.right-cell .collab-photos-content2 {
+      display: flex;
+      background: #e74c3c;
+    }
+
+    input#slide3:checked~.right-cell .collab-photos-content3 {
+      display: flex;
+      background: #3498db;
+    }
+
+    input#slide4:checked~.right-cell .collab-photos-content4 {
+      display: flex;
+      background: #9b59b6;
+    }
+
+    input#slide5:checked~.right-cell .collab-photos-content5 {
+      display: flex;
+      background: #f1c40f;
     }
   }
 
@@ -2259,7 +2392,7 @@ header {
   .graphic-designs-projects {
     margin-top: 4rem;
     padding: 0 2rem;
-    background-color: #F6F7F2;
+    background-color: var(--cream);
     width: 100vw;
     height: 95vh;
     display: flex;
@@ -2284,7 +2417,6 @@ header {
       -ms-overflow-style: none;
       scrollbar-width: none;
       padding: 0 3rem;
-      /* Fade on left and right */
       mask-image: linear-gradient(to right,
           transparent 0,
           black 3rem,
