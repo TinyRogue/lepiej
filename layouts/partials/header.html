@@ -1,7 +1,8 @@
 <header>
   <nav class="main-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-left">
-      <a href="{{ if .IsHome }}#about{{ else }}/#about{{ end }}" class="pill"{{ if .IsHome }} aria-current="page"{{ end }}>O mnie</a>
+      <a href="{{ if .IsHome }}#about{{ else }}/#about{{ end }}" class="pill" {{ if .IsHome }} aria-current="page" {{
+        end }}>O mnie</a>
       <a href="{{ if .IsHome }}#services{{ else }}/#services{{ end }}" class="pill">Oferta</a>
     </div>
     <a href="{{ "/" | relURL }}" class="logo" aria-label="Home">
@@ -20,8 +21,9 @@
 </header>
 <div class="fullscreen-overlay">
   <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="{{ if .IsHome }}#{{ else }}/#{{ end }}">Początek</a>
     <a href="{{ if .IsHome }}#about{{ else }}/#about{{ end }}">O mnie</a>
-    <a href="{{ if .IsHome }}#offer{{ else }}/#offer{{ end }}">Oferta</a>
+    <a href="{{ if .IsHome }}#services{{ else }}/#services{{ end }}">Oferta</a>
     <a href="{{ if .IsHome }}#portfolio{{ else }}/#portfolio{{ end }}">Portfolio</a>
     <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}">Kontakt</a>
     <div class="dot"></div>
