@@ -794,5 +794,4 @@ function setupActionHandlers() {
 document.addEventListener("DOMContentLoaded", () => {
   initializeMainFunctionality();
   setupActionHandlers();
-  console.log("DOMContentLoaded");
 });

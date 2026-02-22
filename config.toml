@@ -1,4 +1,4 @@
-baseURL = "https://lepiej.com"
+baseURL = "https://lepiej.social"
 languageCode = "pl-PL"
 title = "Lepiej."
 publishDir = "public"
@@ -10,7 +10,7 @@ enableGitInfo = false
 [permalinks]
   about-me = "/about-me/"
   ugc = "/ugc/"
-  content-day = "/content-day/"
+  social-media = "/social-media/"
   graphic-designs = "/graphic-designs/"
 
 
