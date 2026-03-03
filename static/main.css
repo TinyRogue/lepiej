@@ -634,7 +634,9 @@ header {
 
         &:nth-child(2) {
           &::before {
-            background: url('/assets/home/shoot-day.JPEG') no-repeat center center / cover;
+            background: image-set(url('/assets/home/shoot-day.avif') type('image/avif'),
+                url('/assets/home/shoot-day.webp') type('image/webp'),
+                url('/assets/home/shoot-day.JPEG') type('image/jpeg')) no-repeat center center / cover;
           }
         }
 
@@ -672,7 +674,9 @@ header {
 
         &:nth-child(2) {
           &::before {
-            background: url('/assets/home/services-shoot-day.JPEG') no-repeat center center / cover;
+            background: image-set(url('/assets/home/services-shoot-day.avif') type('image/avif'),
+                url('/assets/home/services-shoot-day.webp') type('image/webp'),
+                url('/assets/home/services-shoot-day.JPEG') type('image/jpeg')) no-repeat center center / cover;
           }
         }
 
@@ -1405,7 +1409,7 @@ header {
           height: 300px;
           aspect-ratio: 1 / 1;
           object-fit: cover;
-          object-position: center;
+          object-position: 50% 85%;
           z-index: 1;
           position: relative;
 
@@ -2380,7 +2384,8 @@ header {
 
 .subpage-content-day {
   .subpage-hero {
-    background-image: url('https://picsum.photos/1600/900?random=3');
+    background-image: image-set(url('/assets/subpages/social-media/social-media-hero-1.avif') type('image/avif'),
+        url('/assets/subpages/social-media/social-media-hero-1.webp') type('image/webp'));
   }
 }
 

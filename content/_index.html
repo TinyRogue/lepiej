@@ -20,8 +20,13 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
 
 <section id="about" class="meet-me">
   <div class="main">
-    <img src="/assets/home/about-me-left.JPEG" alt="Meet me" class="meet-me-image meet-me-image-left br-1"
-      loading="lazy" />
+    <picture>
+      <source srcset="/assets/home/about-me-left.avif" type="image/avif">
+      <source srcset="/assets/home/about-me-left.webp" type="image/webp">
+      <img src="/assets/home/about-me-left.JPEG" alt="Meet me" loading="lazy"
+        class="meet-me-image meet-me-image-left br-1" />
+    </picture>
+
     <div class="meet-me-content">
       <h3 class="text-center i b serif">
         Bo można zwyczajnie. Albo
@@ -46,10 +51,18 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
 
   <div class="secondary">
     <div class="about-me-more-bg">
-      <img src="/assets/home/about-me-bg.jpg" alt="About me more bg" loading="lazy" />
+      <picture>
+        <source srcset="/assets/home/about-me-bg.avif" type="image/avif">
+        <source srcset="/assets/home/about-me-bg.webp" type="image/webp">
+        <img src="/assets/home/about-me-bg.jpg" alt="About me more bg" loading="lazy" />
+      </picture>
     </div>
-    <img class="about-me-main-photo br-1" src="/assets/home/about-me-main.png" alt="About me main photo"
-      loading="lazy" />
+    <picture>
+      <source srcset="/assets/home/about-me-main.avif" type="image/avif">
+      <source srcset="/assets/home/about-me-main.webp" type="image/webp">
+      <img src="/assets/home/about-me-main.png" alt="About me main photo" loading="lazy"
+        class="about-me-main-photo br-1" />
+    </picture>
     <p class="uppercase text-center">
       Wierzę, że każda marka zasługuje na to, by pokazać się od najlepszej
       strony. Tworzę treści, które budują emocje i zaufanie. Skontaktuj się ze
@@ -140,8 +153,8 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
 
       <figure class="slide">
         <video src="/assets/home/portfolio-2-ugc-make-me-bio.MOV" muted loop playsinline webkit-playsinline
-          alt="Make Me Bio UGC" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-          preload="none"></video>
+          preload="metadata" alt="Make Me Bio UGC"
+          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"></video>
         <figcaption>
           <p><strong>Make Me Bio</strong></p>
           <p>UGC</p>
@@ -150,8 +163,8 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
 
       <figure class="slide">
         <video src="/assets/home/portfolio-3-social-media-personal.mp4" muted loop playsinline webkit-playsinline
-          alt="Pawłowska Podology Social Media" controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-          preload="none"></video>
+          preload="metadata" alt="Pawłowska Podology Social Media"
+          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"></video>
         <figcaption>
           <p><strong>Pawłowska Podology</strong></p>
           <p>Social Media</p>
