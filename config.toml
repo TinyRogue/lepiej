@@ -19,6 +19,7 @@ enableGitInfo = false
   keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
   author = "Lepiej Team"
   themeColor = "#98B4D4"
+  coming_soon = true  # set to false to show the full site
 
 [sitemap]
   changefreq = "monthly"
