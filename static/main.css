@@ -232,33 +232,43 @@ header {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin: 2rem 0;
+    margin: 2rem 2rem;
+
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
   }
 
   .side-cta-left,
   .side-cta-right {
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    overflow: hidden;
     height: 100%;
     margin-top: 0rem;
+    overflow: hidden;
+
+    span {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 0.9rem;
+    }
   }
 
   .side-cta-left {
     position: absolute;
     left: 0;
-    top: 0;
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    bottom: 0;
   }
 
   .side-cta-right {
     position: absolute;
     right: 0;
-    top: 0;
-    bottom: 0;
     writing-mode: vertical-rl;
     text-orientation: mixed;
   }
