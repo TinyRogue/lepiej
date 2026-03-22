@@ -195,6 +195,11 @@ header {
   right: 0;
 }
 
+/* TODO: remove this after coming soon is removed */
+body {
+  background-color: #52001A;
+}
+
 .coming-soon {
   background-color: #52001A;
   color: var(--white);
@@ -202,7 +207,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100lvh;
   width: 100vw;
   position: fixed;
   top: 0;
