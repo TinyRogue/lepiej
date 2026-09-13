@@ -2,25 +2,25 @@
   {
     "name": "Bandi",
     "url": "https://bandi.pl",
-    "logo": "/assets/footer/collaborations/bandi-logo.png",
+    "logo": "/assets/footer/collaborations/bandi-logo.webp",
     "alt": "Bandi Logo"
   },
   {
     "name": "Delive Studios",
     "url": "https://delivestudios.pl/",
-    "logo": "/assets/footer/collaborations/delive-studios-logo.png",
+    "logo": "/assets/footer/collaborations/delive-studios-logo.webp",
     "alt": "Delive Studios Logo"
   },
   {
     "name": "Exbud",
     "url": "https://exbud.pl",
-    "logo": "/assets/footer/collaborations/exbud-logo.png",
+    "logo": "/assets/footer/collaborations/exbud-logo.webp",
     "alt": "Exbud Logo"
   },
   {
     "name": "Make Me Bio",
     "url": "https://eu.makemebio.com/",
-    "logo": "/assets/footer/collaborations/make-me-bio-logo.png",
+    "logo": "/assets/footer/collaborations/make-me-bio-logo.webp",
     "alt": "Make Me Bio Logo"
   },
   {
@@ -32,13 +32,13 @@
   {
     "name": "Say Loca",
     "url": "https://sayloca.pl/",
-    "logo": "/assets/footer/collaborations/say-loca-logo.png",
+    "logo": "/assets/footer/collaborations/say-loca-logo.webp",
     "alt": "Say Loca Logo"
   },
   {
     "name": "Si Senor",
     "url": "https://sisenor.pl/",
-    "logo": "/assets/footer/collaborations/si-senor-logo.png",
+    "logo": "/assets/footer/collaborations/si-senor-logo.webp",
     "alt": "Si Senor Logo"
   }
 ]

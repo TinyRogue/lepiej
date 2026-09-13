@@ -6,7 +6,11 @@
     </a>
     <a href="https://www.tiktok.com/@lepiej.socialmedia" target="_blank" rel="noopener noreferrer"
       class="social-link tiktok" aria-label="TikTok">
-      <img src="{{ "/assets/utility/tik-tok.png" | relURL }}" alt="TikTok">
+      <picture>
+        <source srcset="{{ "/assets/utility/tik-tok.avif" | relURL }}" type="image/avif">
+        <source srcset="{{ "/assets/utility/tik-tok.webp" | relURL }}" type="image/webp">
+        <img src="{{ "/assets/utility/tik-tok.webp" | relURL }}" alt="TikTok" width="16" height="16">
+      </picture>
     </a>
   </div>
 </div>

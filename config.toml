@@ -1,5 +1,5 @@
 baseURL = "https://lepiej.social"
-languageCode = "pl-PL"
+locale = "pl-PL"
 title = "Lepiej."
 publishDir = "public"
 buildDrafts = false
@@ -8,29 +8,34 @@ enableRobotsTXT = true
 enableGitInfo = false
 
 [permalinks]
-  about-me = "/about-me/"
-  ugc = "/ugc/"
-  social-media = "/social-media/"
-  graphic-designs = "/graphic-designs/"
+about-me = "/about-me/"
+ugc = "/ugc/"
+social-media = "/social-media/"
+graphic-designs = "/graphic-designs/"
 
 
 [params]
-  description = "Lepiej. is a company that helps brands grow through social media. We create UGC, illustrations, design, branding, marketing, and audits."
-  keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
-  author = "Lepiej Team"
-  themeColor = "#98B4D4"
-  coming_soon = true  # set to false to show the full site
+description = "Lepiej. is a company that helps brands grow through social media. We create UGC, illustrations, design, branding, marketing, and audits."
+keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
+author = "Lepiej Team"
+themeColor = "#98B4D4"
+coming_soon = false                                                                                                                                      # set to false to show the full site
 
 [sitemap]
-  changefreq = "monthly"
-  priority = 0.5
-  filename = "sitemap.xml"
+changefreq = "monthly"
+priority = 0.5
+filename = "sitemap.xml"
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+# Allow intentionally authored HTML content files under /content
+# (blocked by default since Hugo v0.162.0 for XSS mitigation)
+[security]
+allowContent = ['.*']
 
 [caches]
-  [caches.images]
-    dir = ':cacheDir/images'
+[caches.images]
+dir = ':cacheDir/images'

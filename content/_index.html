@@ -22,7 +22,7 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
     <picture>
       <source srcset="/assets/home/about-me-left.avif" type="image/avif">
       <source srcset="/assets/home/about-me-left.webp" type="image/webp">
-      <img src="/assets/home/about-me-left.JPEG" alt="Meet me" loading="lazy"
+      <img src="/assets/home/about-me-left.webp" alt="Meet me" loading="lazy"
         class="meet-me-image meet-me-image-left br-1" />
     </picture>
 
@@ -45,7 +45,11 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
         <a href="/about-me/" class="button-cta">Poznaj mnie LEPIEJ.</a>
       </div>
     </div>
-    <img src="/assets/home/about-me-right.jpg" alt="Meet me" class="meet-me-image meet-me-image-right" loading="lazy" />
+    <picture>
+      <source srcset="/assets/home/about-me-right.avif" type="image/avif">
+      <source srcset="/assets/home/about-me-right.webp" type="image/webp">
+      <img src="/assets/home/about-me-right.webp" alt="Meet me" class="meet-me-image meet-me-image-right" loading="lazy" />
+    </picture>
   </div>
 
   <div class="secondary">
@@ -53,13 +57,13 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
       <picture>
         <source srcset="/assets/home/about-me-bg.avif" type="image/avif">
         <source srcset="/assets/home/about-me-bg.webp" type="image/webp">
-        <img src="/assets/home/about-me-bg.jpg" alt="About me more bg" loading="lazy" />
+        <img src="/assets/home/about-me-bg.webp" alt="About me more bg" loading="lazy" />
       </picture>
     </div>
     <picture>
       <source srcset="/assets/home/about-me-main.avif" type="image/avif">
       <source srcset="/assets/home/about-me-main.webp" type="image/webp">
-      <img src="/assets/home/about-me-main.png" alt="About me main photo" loading="lazy"
+      <img src="/assets/home/about-me-main.webp" alt="About me main photo" loading="lazy"
         class="about-me-main-photo br-1" />
     </picture>
     <p class="uppercase text-center">
@@ -143,7 +147,11 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
     </h3>
     <div class="carousel-track">
       <figure class="slide middle">
-        <img src="/assets/home/portfolio-1-products-bandi.webp" alt="Bandi Fotografia produktowa" loading="lazy" />
+        <picture>
+          <source srcset="/assets/home/portfolio-1-products-bandi.avif" type="image/avif">
+          <source srcset="/assets/home/portfolio-1-products-bandi.webp" type="image/webp">
+          <img src="/assets/home/portfolio-1-products-bandi.webp" alt="Bandi Fotografia produktowa" loading="lazy" />
+        </picture>
         <figcaption>
           <p><strong>Bandi</strong></p>
           <p>Fotografia produktowa</p>
@@ -151,9 +159,12 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
       </figure>
 
       <figure class="slide">
-        <video src="/assets/home/portfolio-2-ugc-make-me-bio.MOV" muted loop playsinline webkit-playsinline
-          preload="metadata" alt="Make Me Bio UGC"
-          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"></video>
+        <video muted loop playsinline webkit-playsinline preload="metadata" alt="Make Me Bio UGC"
+          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate">
+          <source src="/assets/home/portfolio-2-ugc-make-me-bio.av1.webm" type="video/webm; codecs=av01">
+          <source src="/assets/home/portfolio-2-ugc-make-me-bio.vp9.webm" type="video/webm; codecs=vp9">
+          <source src="/assets/home/portfolio-2-ugc-make-me-bio.mp4" type="video/mp4">
+        </video>
         <figcaption>
           <p><strong>Make Me Bio</strong></p>
           <p>UGC</p>
@@ -171,7 +182,11 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
       </figure>
 
       <figure class="slide">
-        <img src="/assets/home/portfolio-4-products-loca.webp" alt="Loca Fotografia produktowa" loading="lazy" />
+        <picture>
+          <source srcset="/assets/home/portfolio-4-products-loca.avif" type="image/avif">
+          <source srcset="/assets/home/portfolio-4-products-loca.webp" type="image/webp">
+          <img src="/assets/home/portfolio-4-products-loca.webp" alt="Loca Fotografia produktowa" loading="lazy" />
+        </picture>
         <figcaption>
           <p><strong>Loca</strong></p>
           <p>Fotografia produktowa</p>
@@ -179,7 +194,11 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
       </figure>
 
       <figure class="slide">
-        <img src="/assets/home/portfolio-5-products-loca-2.webp" alt="Loca Fotografia produktowa" loading="lazy" />
+        <picture>
+          <source srcset="/assets/home/portfolio-5-products-loca-2.avif" type="image/avif">
+          <source srcset="/assets/home/portfolio-5-products-loca-2.webp" type="image/webp">
+          <img src="/assets/home/portfolio-5-products-loca-2.webp" alt="Loca Fotografia produktowa" loading="lazy" />
+        </picture>
         <figcaption>
           <p><strong>Loca</strong></p>
           <p>Fotografia produktowa</p>
@@ -206,8 +225,12 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
       </figure>
 
       <figure class="slide">
-        <video src="/assets/home/portfolio-8-ugc-bandi.MOV" muted loop playsinline webkit-playsinline alt="Bandi UGC"
-          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none"></video>
+        <video muted loop playsinline webkit-playsinline alt="Bandi UGC"
+          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
+          <source src="/assets/home/portfolio-8-ugc-bandi.av1.webm" type="video/webm; codecs=av01">
+          <source src="/assets/home/portfolio-8-ugc-bandi.vp9.webm" type="video/webm; codecs=vp9">
+          <source src="/assets/home/portfolio-8-ugc-bandi.mp4" type="video/mp4">
+        </video>
         <figcaption>
           <p><strong>Bandi</strong></p>
           <p>UGC</p>
@@ -215,8 +238,12 @@ description: "Lepiej. - Kreatywne treści w Twoim stylu. UGC, ilustracje, design
       </figure>
 
       <figure class="slide">
-        <video src="/assets/home/portfolio-9-ugc-loca.mov" muted loop playsinline webkit-playsinline alt="Loca UGC"
-          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none"></video>
+        <video muted loop playsinline webkit-playsinline alt="Loca UGC"
+          controlslist="nofullscreen nodownload noremoteplayback noplaybackrate" preload="none">
+          <source src="/assets/home/portfolio-9-ugc-loca.av1.webm" type="video/webm; codecs=av01">
+          <source src="/assets/home/portfolio-9-ugc-loca.vp9.webm" type="video/webm; codecs=vp9">
+          <source src="/assets/home/portfolio-9-ugc-loca.mp4" type="video/mp4">
+        </video>
         <figcaption>
           <p><strong>Loca</strong></p>
           <p>UGC</p>

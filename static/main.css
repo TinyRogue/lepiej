@@ -195,11 +195,6 @@ header {
   right: 0;
 }
 
-/* TODO: remove this after coming soon is removed */
-body {
-  background-color: #52001A;
-}
-
 .coming-soon {
   background-color: #52001A;
   color: var(--white);
@@ -444,7 +439,8 @@ body {
   justify-content: center;
   align-items: center;
   height: calc(100vh - 4.5rem - 1rem);
-  background-image: url(/assets/home/hero.JPEG);
+  background-image: image-set(url('/assets/home/hero.avif') type('image/avif'),
+      url('/assets/home/hero.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -712,21 +708,22 @@ body {
       @media (max-width: 767px) {
         &:nth-child(1) {
           &::before {
-            background: url('/assets/home/ugc.JPG') no-repeat center center / cover;
+            background: image-set(url('/assets/home/services-ugc.avif') type('image/avif'),
+                url('/assets/home/services-ugc.webp') type('image/webp')) no-repeat center center / cover;
           }
         }
 
         &:nth-child(2) {
           &::before {
-            background: image-set(url('/assets/home/shoot-day.avif') type('image/avif'),
-                url('/assets/home/shoot-day.webp') type('image/webp'),
-                url('/assets/home/shoot-day.JPEG') type('image/jpeg')) no-repeat center center / cover;
+            background: image-set(url('/assets/home/services-shoot-day.avif') type('image/avif'),
+                url('/assets/home/services-shoot-day.webp') type('image/webp')) no-repeat center center / cover;
           }
         }
 
         &:nth-child(3) {
           &::before {
-            background: url('/assets/home/graphic-projects.JPG') no-repeat center center / cover;
+            background: image-set(url('/assets/home/services-graphic-projects.avif') type('image/avif'),
+                url('/assets/home/services-graphic-projects.webp') type('image/webp')) no-repeat center center / cover;
           }
         }
       }
@@ -752,21 +749,22 @@ body {
 
         &:nth-child(1) {
           &::before {
-            background: url('/assets/home/services-ugc.JPG') no-repeat center center / cover;
+            background: image-set(url('/assets/home/services-ugc.avif') type('image/avif'),
+                url('/assets/home/services-ugc.webp') type('image/webp')) no-repeat center center / cover;
           }
         }
 
         &:nth-child(2) {
           &::before {
             background: image-set(url('/assets/home/services-shoot-day.avif') type('image/avif'),
-                url('/assets/home/services-shoot-day.webp') type('image/webp'),
-                url('/assets/home/services-shoot-day.JPEG') type('image/jpeg')) no-repeat center center / cover;
+                url('/assets/home/services-shoot-day.webp') type('image/webp')) no-repeat center center / cover;
           }
         }
 
         &:nth-child(3) {
           &::before {
-            background: url('/assets/home/services-graphic-projects.JPG') no-repeat center center / cover;
+            background: image-set(url('/assets/home/services-graphic-projects.avif') type('image/avif'),
+                url('/assets/home/services-graphic-projects.webp') type('image/webp')) no-repeat center center / cover;
           }
         }
       }
@@ -963,6 +961,7 @@ body {
       scroll-snap-align: center;
       scroll-snap-stop: always;
       border-radius: 1.5rem;
+      overflow: hidden;
       height: 100%;
       aspect-ratio: 9 / 16;
       opacity: 0;
@@ -971,9 +970,13 @@ body {
       position: relative;
       flex-shrink: 0;
 
+      picture {
+        display: contents;
+      }
+
       img,
       video {
-        border-radius: inherit;
+        border-radius: 1.5rem;
         height: 100%;
         width: 100%;
         object-fit: cover;
@@ -1089,6 +1092,10 @@ body {
     justify-content: center;
     cursor: pointer;
 
+    picture {
+      display: contents;
+    }
+
     img {
       height: 60px;
       width: auto;
@@ -1119,7 +1126,8 @@ body {
 
 .footer {
   position: relative;
-  background: url('/assets/footer/bg.png') no-repeat center center / cover;
+  background: image-set(url('/assets/footer/bg.avif') type('image/avif'),
+      url('/assets/footer/bg.webp') type('image/webp')) no-repeat center center / cover;
   padding: 4rem 2rem;
   margin-top: 1rem;
   min-height: 75vh;
@@ -1466,6 +1474,10 @@ body {
         position: relative;
         margin-bottom: 2rem;
 
+        picture {
+          display: contents;
+        }
+
         @media (min-width: 768px) {
           margin-bottom: 0;
           flex: 0 0 auto;
@@ -1608,6 +1620,10 @@ body {
 
       .who-is-this-girl-image {
         position: relative;
+
+        picture {
+          display: contents;
+        }
 
         img {
           width: 300px;

@@ -4,7 +4,17 @@
   <div class="infinite-carousel-track">
     {{ range $.Site.Data.collaborations }}
     <a href="{{ .url }}" class="infinite-carousel-item" target="_blank" rel="noopener noreferrer">
+      {{ $ext := path.Ext .logo }}
+      {{ if eq $ext ".svg" }}
       <img src="{{ .logo | relURL }}" alt="{{ .alt }}" loading="lazy">
+      {{ else }}
+      {{ $base := strings.TrimSuffix $ext .logo }}
+      <picture>
+        <source srcset="{{ printf "%s.avif" $base | relURL }}" type="image/avif">
+        <source srcset="{{ printf "%s.webp" $base | relURL }}" type="image/webp">
+        <img src="{{ .logo | relURL }}" alt="{{ .alt }}" loading="lazy">
+      </picture>
+      {{ end }}
     </a>
     {{ end }}
   </div>
