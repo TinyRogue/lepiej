@@ -128,6 +128,8 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  /* keep anchor targets clear of the fixed nav */
+  scroll-padding-top: 5rem;
 }
 
 /* Font display optimization */
@@ -545,15 +547,26 @@ header {
     transition: transform 0.1s ease-out;
     will-change: transform, opacity;
     overflow: hidden;
-    pointer-events: none;
+    color: var(--black);
+    cursor: pointer;
     transform-origin: center center;
 
     & span {
       font-weight: 400;
       font-size: 0.8rem;
       transform: translateY(-50%);
-      transition: transform 0.1s ease-out;
+      transition: transform 0.1s ease-out, color 0.2s;
       will-change: transform;
+    }
+
+    &:hover span,
+    &:focus-visible span {
+      color: var(--primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: -4px;
     }
   }
 }
