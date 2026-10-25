@@ -11,6 +11,89 @@ function throttle(fn, delay) {
   };
 }
 
+function playVideoSafe(video) {
+  if (!video?.play) return;
+  video.play().catch((error) => {
+    console.log("Video autoplay failed:", error);
+  });
+}
+
+function isSlideMediaReady(slide) {
+  const video = slide.querySelector("video");
+  if (video) return video.readyState >= 2;
+  const img = slide.querySelector("img");
+  if (img) return img.complete && img.naturalWidth > 0;
+  return true;
+}
+
+function updateSlideLoadingState(slide) {
+  slide.classList.toggle("is-loading", !isSlideMediaReady(slide));
+}
+
+function watchSlideMedia(slide) {
+  if (slide.dataset.loadWatch === "1") return;
+  slide.dataset.loadWatch = "1";
+
+  const onUpdate = () => updateSlideLoadingState(slide);
+
+  const video = slide.querySelector("video");
+  if (video) {
+    ["loadeddata", "canplay", "playing", "error"].forEach((eventName) => {
+      video.addEventListener(eventName, onUpdate);
+    });
+  }
+
+  const img = slide.querySelector("img");
+  if (img) {
+    ["load", "error"].forEach((eventName) => {
+      img.addEventListener(eventName, onUpdate);
+    });
+  }
+
+  onUpdate();
+}
+
+function initializeCarouselSlideLoading(slides) {
+  slides.forEach((slide) => watchSlideMedia(slide));
+}
+
+// Warm media around the centered slide so peeks (±1) and the next swipe (±2)
+// are ready even on slow connections. Videos outside the window are paused.
+function syncCarouselMedia(slides, middleSlide, radius = 2) {
+  const list = Array.from(slides);
+  const middleIndex = list.indexOf(middleSlide);
+  if (middleIndex < 0) return;
+
+  list.forEach((slide, index) => {
+    const distance = Math.abs(index - middleIndex);
+    const inWindow = distance <= radius;
+
+    watchSlideMedia(slide);
+
+    if (inWindow) {
+      slide.querySelectorAll("img").forEach((img) => {
+        if (img.loading === "lazy") img.loading = "eager";
+        if (!img.complete) {
+          const src = img.currentSrc || img.src;
+          if (src) new Image().src = src;
+        }
+        updateSlideLoadingState(slide);
+      });
+    }
+
+    const video = slide.querySelector("video");
+    if (!video) return;
+
+    if (inWindow) {
+      if (video.preload === "none") video.preload = "auto";
+      playVideoSafe(video);
+      updateSlideLoadingState(slide);
+    } else if (!video.paused) {
+      video.pause();
+    }
+  });
+}
+
 let cleanupFunctions = [];
 
 function initializeMainFunctionality() {
@@ -170,8 +253,15 @@ function initializeServicesSection() {
 }
 
 function initializePortfolioCarousel() {
-  const portfolioSlides = document.querySelectorAll(".slide");
-  if (portfolioSlides.length === 0) return;
+  const slideCaption = document.querySelector(".slide-caption");
+  const carousel = document.querySelector(".carousel");
+  if (!slideCaption || !carousel || carousel.closest(".ugc-collab")) return;
+
+  const carouselTrack = carousel.querySelector(".carousel-track");
+  const portfolioSlides = carousel.querySelectorAll(".slide");
+  if (!carouselTrack || portfolioSlides.length === 0) return;
+
+  initializeCarouselSlideLoading(portfolioSlides);
 
   previousSlide = () => {
     if (carouselTrack && portfolioSlides.length > 0) {
@@ -210,12 +300,9 @@ function initializePortfolioCarousel() {
   };
 
   let startX = 0;
-  const carousel = document.querySelector(".carousel");
-  const carouselTrack = document.querySelector(".carousel-track");
-  const slideCaption = document.querySelector(".slide-caption");
-  const firstSlide = document.querySelector(".slide");
+  const firstSlide = carousel.querySelector(".slide");
 
-  if (slideCaption && firstSlide) {
+  if (firstSlide) {
     const companyNameEl = slideCaption.querySelector("#company-name");
     const serviceDescEl = slideCaption.querySelector("#service-description");
     const figcaption = firstSlide.querySelector("figcaption");
@@ -249,7 +336,7 @@ function initializePortfolioCarousel() {
     }
   };
 
-  if (carousel && !CSS.supports("scroll-snap-type", "x mandatory")) {
+  if (!CSS.supports("scroll-snap-type", "x mandatory")) {
     carousel.addEventListener("touchstart", handleTouchStart, {
       passive: true,
     });
@@ -261,8 +348,6 @@ function initializePortfolioCarousel() {
   }
 
   const handleCarouselScroll = () => {
-    if (!carouselTrack || !slideCaption) return;
-
     const trackRect = carouselTrack.getBoundingClientRect();
     const trackWidth = trackRect.width;
     const trackCenter = trackWidth / 2;
@@ -290,35 +375,32 @@ function initializePortfolioCarousel() {
           serviceDescEl.textContent =
             figcaption.querySelector("p:last-child").textContent;
         }
-        if (
-          item.firstElementChild &&
-          item.firstElementChild.tagName === "VIDEO"
-        ) {
-          item.firstElementChild.play();
-        }
+        syncCarouselMedia(portfolioSlides, item, 2);
       }
     }
   };
 
-  if (carouselTrack) {
-    carouselTrack.addEventListener("scroll", handleCarouselScroll);
-    cleanupFunctions.push(() =>
-      carouselTrack.removeEventListener("scroll", handleCarouselScroll),
-    );
+  carouselTrack.addEventListener("scroll", handleCarouselScroll);
+  cleanupFunctions.push(() =>
+    carouselTrack.removeEventListener("scroll", handleCarouselScroll),
+  );
 
-    // Ensure first slide is initially centered
-    setTimeout(() => {
-      const firstSlide = carouselTrack.querySelector(".slide");
-      if (firstSlide && !carouselTrack.querySelector(".slide.middle")) {
-        firstSlide.scrollIntoView({
-          behavior: "auto",
-          block: "nearest",
-          inline: "center",
-        });
-        handleCarouselScroll();
-      }
-    }, 100);
-  }
+  setTimeout(() => {
+    const middleSlide =
+      carouselTrack.querySelector(".slide.middle") ||
+      carouselTrack.querySelector(".slide");
+    if (!middleSlide) return;
+
+    if (!middleSlide.classList.contains("middle")) {
+      middleSlide.scrollIntoView({
+        behavior: "auto",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+    handleCarouselScroll();
+    syncCarouselMedia(portfolioSlides, middleSlide, 2);
+  }, 100);
 }
 
 function initializeContactForm() {
@@ -420,6 +502,8 @@ function initializeUgcCarousel() {
 
   if (!carouselTrack || ugcSlides.length === 0) return;
 
+  initializeCarouselSlideLoading(ugcSlides);
+
   let currentUnmutedVideo = null;
   let isSoundEnabled = false;
   let scrollTimeout = null;
@@ -518,13 +602,7 @@ function initializeUgcCarousel() {
       descEl.textContent = descP.textContent;
     }
 
-    // Start playing video immediately
-    const video = slide.querySelector("video");
-    if (video && video.play) {
-      video.play().catch((error) => {
-        console.log("Video autoplay failed:", error);
-      });
-    }
+    syncCarouselMedia(ugcSlides, slide, 2);
   };
 
   const updateSoundFrom = (slide) => {

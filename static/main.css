@@ -877,6 +877,16 @@ header {
   }
 }
 
+@keyframes carousel-slide-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .carousel {
   width: 100%;
   margin: 0 auto;
@@ -969,6 +979,7 @@ header {
       transition: all 0.3s ease;
       position: relative;
       flex-shrink: 0;
+      background-color: rgba(var(--black-rgb), 0.06);
 
       picture {
         display: contents;
@@ -980,6 +991,31 @@ header {
         height: 100%;
         width: 100%;
         object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      &:not(.is-loading) {
+
+        img,
+        video {
+          opacity: 1;
+        }
+      }
+
+      &.is-loading::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(110deg,
+            rgba(var(--black-rgb), 0.07) 15%,
+            rgba(var(--primary-rgb), 0.14) 45%,
+            rgba(var(--black-rgb), 0.07) 75%);
+        background-size: 200% 100%;
+        animation: carousel-slide-shimmer 1.4s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 1;
       }
 
       &.middle {
@@ -1009,6 +1045,7 @@ header {
         text-align: right;
         color: var(--black);
         flex-direction: column;
+        z-index: 2;
 
         @media (min-width: 768px) {
           opacity: 0;
