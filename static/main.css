@@ -354,6 +354,24 @@ header {
     }
   }
 
+  a.mobile-nav-cta {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 2.25rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--primary);
+    border-radius: 2.2em;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.2);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--white);
+      background: var(--primary-light);
+    }
+  }
+
   .dot {
     background-color: var(--primary);
     position: absolute;
@@ -414,6 +432,11 @@ header {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 1 1 0;
+  }
+
+  .nav-right {
+    justify-content: flex-end;
   }
 
   .pill {
@@ -427,6 +450,24 @@ header {
 
   .pill:hover {
     color: var(--primary);
+  }
+
+  .pill.pill-cta {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.2);
+    transition: background 0.2s, border-color 0.2s, transform 0.19s, box-shadow 0.19s;
+  }
+
+  .pill.pill-cta:hover,
+  .pill.pill-cta:focus-visible {
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(var(--primary-rgb), 0.3);
   }
 }
 

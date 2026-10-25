@@ -10,7 +10,7 @@
     </a>
     <div class="nav-right">
       <a href="{{ if .IsHome }}#portfolio{{ else }}/#portfolio{{ end }}" class="pill">Portfolio</a>
-      <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}" class="pill">Kontakt</a>
+      <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}" class="pill pill-cta">Napisz do mnie</a>
     </div>
     <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
       <span class="line"></span>
@@ -25,7 +25,7 @@
     <a href="{{ if .IsHome }}#about{{ else }}/#about{{ end }}">O mnie</a>
     <a href="{{ if .IsHome }}#services{{ else }}/#services{{ end }}">Oferta</a>
     <a href="{{ if .IsHome }}#portfolio{{ else }}/#portfolio{{ end }}">Portfolio</a>
-    <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}">Kontakt</a>
+    <a href="{{ if .IsHome }}#contact{{ else }}/#contact{{ end }}" class="mobile-nav-cta">Napisz do mnie</a>
     <div class="dot"></div>
   </nav>
 </div>
