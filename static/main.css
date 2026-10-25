@@ -2584,64 +2584,113 @@ header {
     margin-top: 4rem;
     width: 100%;
     background-color: var(--cream);
-    padding: 3rem 1.25rem;
+    padding: 3rem 1.25rem 4rem;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
 
     @media (min-width: 768px) {
-      padding: 4rem 2rem;
+      padding: 4rem 2rem 5rem;
+      gap: 4rem;
     }
 
-    .social-media-offer-card {
+    h2 {
+      text-align: center;
+      font-family: var(--serif-font);
+      font-weight: 400;
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    .social-media-offer-row {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      border: 1px solid var(--black);
-      max-width: min(400px, 90vw);
-      padding: 2rem;
-      background: var(--white);
-      height: 80vh;
-      border-radius: 1rem;
+      align-items: stretch;
+      gap: 1.5rem;
+      width: 90vw;
+      max-width: 1280px;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: fadeIn 0.75s ease-in-out both;
+      }
     }
 
-    .social-media-offer-card-photo {
+    .social-media-offer-row--reverse {
+      @media (min-width: 768px) {
+        flex-direction: row-reverse;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation-delay: 0.15s;
+      }
+    }
+
+    .social-media-offer-row-photo {
       width: 100%;
-      height: 100%;
-      aspect-ratio: 1;
-      max-height: 60%;
+      aspect-ratio: 4 / 5;
+      border-radius: 2rem;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      @media (min-width: 768px) {
+        width: 48%;
+        max-width: 520px;
+      }
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center;
+        display: block;
+        transition: transform 0.5s ease;
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+
+      &:hover img {
+        @media (prefers-reduced-motion: no-preference) {
+          transform: scale(1.03);
+        }
       }
     }
 
-    .social-media-offer-card-body {
+    .social-media-offer-row-body {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 1rem;
       flex: 1;
-      height: 100%;
+      text-align: left;
     }
 
-    .social-media-offer-card-title {
-      font-size: 1.5em;
-      text-align: center;
+    .social-media-offer-row-title {
+      font-family: var(--serif-font);
+      font-weight: 400;
+      font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+      margin: 0;
+      text-align: left;
     }
 
-    .social-media-offer-card-desc {
-      font-size: 0.9em;
-      text-align: center;
+    .social-media-offer-row-desc {
+      font-size: 0.95em;
+      line-height: 1.7;
+      margin: 0;
+      text-align: left;
+      max-width: 36em;
     }
 
-    .social-media-offer-card-cta {
+    .social-media-offer-row-cta {
+      margin-top: 0.5rem;
       padding: 0.5em 1em;
       font-size: 0.9em;
     }
