@@ -196,6 +196,115 @@ function initializePageSpecificElements() {
   initializeVideos();
   initializeInfiniteLogoCarousel();
   initializeUgcCarousel();
+  initializeCollabPhotosCarousel();
+}
+
+const COLLAB_SLIDE_MS = 5000;
+
+function initializeCollabPhotosCarousel() {
+  const wrapper = document.querySelector(".collab-photos-carousel-wrapper");
+  if (!wrapper) return;
+
+  const radios = Array.from(wrapper.querySelectorAll('input[name="slide"]'));
+  const labels = Array.from(
+    wrapper.querySelectorAll(".collab-photos-dots label"),
+  );
+  if (radios.length === 0) return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+  let timerId = null;
+
+  function clearTimer() {
+    if (timerId !== null) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+  }
+
+  function restartProgress() {
+    labels.forEach((label) => label.classList.remove("is-progressing"));
+    if (prefersReducedMotion.matches) return;
+
+    const checked = radios.find((radio) => radio.checked);
+    if (!checked) return;
+    const activeLabel = wrapper.querySelector(
+      `.collab-photos-dots label[for="${checked.id}"]`,
+    );
+    if (!activeLabel) return;
+
+    // Force a reflow so the fill animation restarts from empty.
+    void activeLabel.offsetWidth;
+    activeLabel.classList.add("is-progressing");
+  }
+
+  function advance() {
+    const currentIndex = radios.findIndex((radio) => radio.checked);
+    const nextIndex = (Math.max(currentIndex, 0) + 1) % radios.length;
+    radios[nextIndex].checked = true;
+    // Programmatic checks do not fire "change"; sync progress + timer explicitly.
+    restartProgress();
+    scheduleNext();
+  }
+
+  function scheduleNext() {
+    clearTimer();
+    if (prefersReducedMotion.matches) return;
+    timerId = setTimeout(advance, COLLAB_SLIDE_MS);
+  }
+
+  function onSlideChange() {
+    restartProgress();
+    scheduleNext();
+  }
+
+  function onDotClick(event) {
+    const label = event.currentTarget;
+    const targetId = label.getAttribute("for");
+    const radio = radios.find((input) => input.id === targetId);
+    // Clicking the already-active dot does not fire "change" — reset explicitly.
+    if (radio?.checked) {
+      restartProgress();
+      scheduleNext();
+    }
+  }
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", onSlideChange);
+  });
+  labels.forEach((label) => {
+    label.addEventListener("click", onDotClick);
+  });
+
+  const onMotionPreferenceChange = () => {
+    if (prefersReducedMotion.matches) {
+      clearTimer();
+      labels.forEach((label) => label.classList.remove("is-progressing"));
+    } else {
+      restartProgress();
+      scheduleNext();
+    }
+  };
+  prefersReducedMotion.addEventListener("change", onMotionPreferenceChange);
+
+  cleanupFunctions.push(() => {
+    clearTimer();
+    labels.forEach((label) => {
+      label.classList.remove("is-progressing");
+      label.removeEventListener("click", onDotClick);
+    });
+    radios.forEach((radio) => {
+      radio.removeEventListener("change", onSlideChange);
+    });
+    prefersReducedMotion.removeEventListener(
+      "change",
+      onMotionPreferenceChange,
+    );
+  });
+
+  restartProgress();
+  scheduleNext();
 }
 
 function initializeWritingAnimation() {

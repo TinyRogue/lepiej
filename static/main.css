@@ -887,6 +887,16 @@ header {
   }
 }
 
+@keyframes collab-dot-progress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
 .carousel {
   width: 100%;
   margin: 0 auto;
@@ -2292,6 +2302,7 @@ header {
   }
 
   .collab-photos {
+    --collab-slide-duration: 5s;
     display: grid;
     grid-template-columns: 1fr;
     padding: 2rem;
@@ -2339,11 +2350,25 @@ header {
       gap: 10px;
 
       label {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
+        position: relative;
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
         background: rgba(var(--white-rgb), 0.5);
         cursor: pointer;
+        overflow: hidden;
+        transition: width 0.3s ease;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 0;
+          border-radius: inherit;
+          background: rgba(var(--primary-rgb), 0.85);
+        }
       }
     }
 
@@ -2371,8 +2396,38 @@ header {
     input#slide2:checked~.collab-photos-carousel .collab-photos-dots label[for="slide2"],
     input#slide3:checked~.collab-photos-carousel .collab-photos-dots label[for="slide3"],
     input#slide4:checked~.collab-photos-carousel .collab-photos-dots label[for="slide4"],
-    input#slide5:checked~.collab-photos-carousel .collab-photos-dots label[for="slide5"] {
-      background: var(--primary);
+    input#slide5:checked~.collab-photos-carousel .collab-photos-dots label[for="slide5"],
+    .collab-photos-dots label.is-progressing {
+      width: 2.5rem;
+    }
+
+    .collab-photos-dots label.is-progressing::after {
+      animation: collab-dot-progress var(--collab-slide-duration) linear forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .collab-photos-dots label {
+        transition: none;
+
+        &::after {
+          animation: none;
+        }
+      }
+
+      input#slide1:checked~.collab-photos-carousel .collab-photos-dots label[for="slide1"],
+      input#slide2:checked~.collab-photos-carousel .collab-photos-dots label[for="slide2"],
+      input#slide3:checked~.collab-photos-carousel .collab-photos-dots label[for="slide3"],
+      input#slide4:checked~.collab-photos-carousel .collab-photos-dots label[for="slide4"],
+      input#slide5:checked~.collab-photos-carousel .collab-photos-dots label[for="slide5"],
+      .collab-photos-dots label.is-progressing {
+        width: 14px;
+        background: var(--primary);
+      }
+
+      .collab-photos-dots label.is-progressing::after {
+        display: none;
+        animation: none;
+      }
     }
 
     .right-cell {
