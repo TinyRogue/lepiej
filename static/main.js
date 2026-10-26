@@ -197,6 +197,91 @@ function initializePageSpecificElements() {
   initializeInfiniteLogoCarousel();
   initializeUgcCarousel();
   initializeCollabPhotosCarousel();
+  initializeScrollReveal();
+}
+
+const REVEAL_SELECTORS = [
+  ".meet-me-image",
+  ".meet-me-content",
+  ".about-me-more-bg",
+  ".about-me-main-photo",
+  ".meet-me .secondary > p",
+  ".meet-me .secondary > .button-cta",
+  ".portfolio-title-container",
+  ".portfolio .carousel",
+  ".collaborations",
+  ".footer-left",
+  ".footer-right",
+  ".social-media-offers > h2",
+  ".social-media-offer-row",
+  ".social-media-phones > h2",
+  ".phone-showcase-item",
+  ".social-media-split-panel",
+  ".social-media-split-photo",
+  ".ugc-collab > h2",
+  ".collab-wrapper",
+  ".collab-photos",
+  ".collaboration-photo-collage",
+  ".collaboration-plan-content",
+  ".who-is-this-girl-image",
+  ".who-is-this-girl-content",
+  ".expansion",
+  ".photos-grid > div",
+  ".graphics-designs-services .side-image",
+  ".graphics-designs-services-content",
+].join(", ");
+const REVEAL_STAGGER_MS = 90;
+const REVEAL_MAX_STAGGER_STEPS = 4;
+
+function initializeScrollReveal() {
+  if (!("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const viewportHeight = window.innerHeight;
+  const targets = Array.from(
+    document.querySelectorAll(REVEAL_SELECTORS),
+  ).filter((element) => element.getBoundingClientRect().top >= viewportHeight);
+  if (targets.length === 0) return;
+
+  const resetElement = (element) => {
+    element.classList.remove("reveal", "is-revealed");
+    element.style.removeProperty("--reveal-delay");
+    element.removeEventListener("animationend", handleAnimationEnd);
+  };
+
+  function handleAnimationEnd(event) {
+    if (event.target !== event.currentTarget) return;
+    if (event.animationName !== "reveal") return;
+    resetElement(event.currentTarget);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let step = 0;
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const element = entry.target;
+        const delay =
+          Math.min(step, REVEAL_MAX_STAGGER_STEPS) * REVEAL_STAGGER_MS;
+        element.style.setProperty("--reveal-delay", `${delay}ms`);
+        element.classList.add("is-revealed");
+        observer.unobserve(element);
+        step++;
+      });
+    },
+    { rootMargin: "0px 0px -10% 0px" },
+  );
+
+  targets.forEach((element) => {
+    element.classList.add("reveal");
+    element.addEventListener("animationend", handleAnimationEnd);
+    observer.observe(element);
+  });
+
+  cleanupFunctions.push(() => {
+    observer.disconnect();
+    targets.forEach(resetElement);
+  });
 }
 
 const COLLAB_SLIDE_MS = 5000;
@@ -263,7 +348,6 @@ function initializeCollabPhotosCarousel() {
     const label = event.currentTarget;
     const targetId = label.getAttribute("for");
     const radio = radios.find((input) => input.id === targetId);
-    // Clicking the already-active dot does not fire "change" — reset explicitly.
     if (radio?.checked) {
       restartProgress();
       scheduleNext();

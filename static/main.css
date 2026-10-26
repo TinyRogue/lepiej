@@ -114,6 +114,24 @@
   animation: fadeIn 0.75s ease-in-out forwards;
 }
 
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards paused;
+    animation-delay: var(--reveal-delay, 0s);
+  }
+
+  .reveal.is-revealed {
+    animation-play-state: running;
+  }
+}
+
 #writing-animation::after {
   content: "|";
   color: var(--primary);
@@ -131,11 +149,9 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  /* keep anchor targets clear of the fixed nav */
   scroll-padding-top: 5rem;
 }
 
-/* Font display optimization */
 @font-face {
   font-family: "Raleway";
   font-display: swap;
@@ -2816,19 +2832,11 @@ header {
         align-items: center;
         gap: 3rem;
       }
-
-      @media (prefers-reduced-motion: no-preference) {
-        animation: fadeIn 0.75s ease-in-out both;
-      }
     }
 
     .social-media-offer-row--reverse {
       @media (min-width: 768px) {
         flex-direction: row-reverse;
-      }
-
-      @media (prefers-reduced-motion: no-preference) {
-        animation-delay: 0.15s;
       }
     }
 
@@ -2961,26 +2969,6 @@ header {
       @media (min-width: 900px) {
         width: min(230px, 18vw);
       }
-
-      @media (prefers-reduced-motion: no-preference) {
-        animation: slideUpFadeIn 0.8s ease both;
-
-        &:nth-child(1) {
-          animation-delay: 0.05s;
-        }
-
-        &:nth-child(2) {
-          animation-delay: 0.15s;
-        }
-
-        &:nth-child(3) {
-          animation-delay: 0.25s;
-        }
-
-        &:nth-child(4) {
-          animation-delay: 0.35s;
-        }
-      }
     }
 
     .iphone {
@@ -3110,10 +3098,6 @@ header {
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: min(90vh, 820px);
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      animation: slideUpFadeIn 0.8s ease both;
     }
   }
 
