@@ -18,7 +18,7 @@ graphic-designs = "/graphic-designs/"
 description = "Lepiej. is a company that helps brands grow through social media. We create UGC, illustrations, design, branding, marketing, and audits."
 keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
 author = "Lepiej Team"
-themeColor = "#98B4D4"
+themeColor = "#9E0031"
 coming_soon = false                                                                                                                                      # set to false to show the full site
 
 [sitemap]
