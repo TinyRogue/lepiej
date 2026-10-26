@@ -1503,11 +1503,28 @@ header {
       flex-grow: 1;
 
       .contact-form-section {
+        .contact-form-heading {
+          font-family: var(--font-family);
+          font-size: 2em;
+          font-weight: 400;
+          letter-spacing: 1px;
+          margin: 0 0 24px;
+          color: var(--white);
+        }
+
         .contact-form {
           display: flex;
           flex-direction: column;
           gap: 16px;
           max-width: 400px;
+
+          .contact-form-honeypot {
+            display: none !important;
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            pointer-events: none;
+          }
 
           .contact-form-field {
             display: flex;
@@ -1525,7 +1542,8 @@ header {
           }
 
           .form-input,
-          .form-textarea {
+          .form-textarea,
+          .form-select {
             padding: 14px;
             border: 1px solid rgba(var(--white-rgb), 0.3);
             border-radius: 8px;
@@ -1548,9 +1566,54 @@ header {
             }
           }
 
+          .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+            cursor: pointer;
+
+            option {
+              background-color: #1a1a1a;
+              color: var(--white);
+            }
+          }
+
           .form-textarea {
             resize: vertical;
             min-height: 120px;
+          }
+
+          .button-cta:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+          }
+
+          .contact-form-status {
+            margin: 0;
+            font-family: var(--font-family);
+            font-size: 0.95em;
+            line-height: 1.4;
+
+            &.is-success {
+              color: var(--white);
+            }
+
+            &.is-error {
+              color: rgba(var(--white-rgb), 0.9);
+
+              a {
+                color: var(--white);
+                text-decoration: underline;
+                text-underline-offset: 2px;
+
+                &:hover {
+                  color: var(--primary);
+                }
+              }
+            }
           }
 
           .form-submit {
@@ -1569,6 +1632,11 @@ header {
 
             &:hover {
               background-color: var(--primary-dark);
+            }
+
+            &:disabled {
+              opacity: 0.6;
+              cursor: not-allowed;
             }
           }
         }

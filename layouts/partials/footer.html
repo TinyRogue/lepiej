@@ -1,19 +1,47 @@
+{{ $accessKey := cond hugo.IsProduction .Site.Params.web3forms.prodAccessKey .Site.Params.web3forms.devAccessKey }}
 <footer id="contact" class="footer">
   <div class="footer-cta">
     <div class="footer-top">
       <div class="footer-left">
         <div class="contact-form-section">
+          <h2 class="contact-form-heading">Opowiedz mi o swojej marce</h2>
           <form class="contact-form" id="contact-form">
+            <input type="hidden" name="access_key" value="{{ $accessKey }}">
+            <input type="hidden" name="subject" value="Nowe zapytanie z lepiej.social">
+            <input type="hidden" name="from_name" value="Lepiej. formularz">
+            <input type="checkbox" name="botcheck" class="contact-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
             <div class="contact-form-field">
-              <label for="form-title">Tytuł wiadomości</label>
-              <input type="text" placeholder="Hej!" class="form-input" id="form-title" required>
+              <label for="form-name">Imię</label>
+              <input type="text" name="name" id="form-name" class="form-input" placeholder="Jak masz na imię?"
+                autocomplete="name" required>
             </div>
+
             <div class="contact-form-field">
-              <label for="form-content">Treść</label>
-              <textarea placeholder="Chcemy UGC!" class="form-textarea" id="form-content" rows="4"
-                required></textarea>
+              <label for="form-email">Email</label>
+              <input type="email" name="email" id="form-email" class="form-input" placeholder="twoj@email.pl"
+                autocomplete="email" required>
             </div>
-            <button type="submit" class="button-cta">Wyślij maila</button>
+
+            <div class="contact-form-field">
+              <label for="form-service">Czego potrzebujesz?</label>
+              <select name="service" id="form-service" class="form-select" required>
+                <option value="" disabled selected>Wybierz...</option>
+                <option value="UGC">UGC</option>
+                <option value="Social media">Social media</option>
+                <option value="Grafiki">Grafiki</option>
+                <option value="Inne">Inne</option>
+              </select>
+            </div>
+
+            <div class="contact-form-field">
+              <label for="form-message">Wiadomość</label>
+              <textarea name="message" id="form-message" class="form-textarea" rows="4"
+                placeholder="Opowiedz, czego potrzebuje Twoja marka..." required></textarea>
+            </div>
+
+            <button type="submit" class="button-cta">Wyślij wiadomość</button>
+            <p class="contact-form-status" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
       </div>

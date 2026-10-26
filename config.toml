@@ -21,6 +21,10 @@ author = "Lepiej. Team"
 themeColor = "#9E0031"
 coming_soon = false                                                                                                                                      # set to false to show the full site
 
+[params.web3forms]
+devAccessKey = "42924b05-5b38-488d-9354-ebc01571c16c"
+prodAccessKey = "34817de5-c140-4e21-af08-432077547e06"
+
 [sitemap]
 changefreq = "monthly"
 priority = 0.5

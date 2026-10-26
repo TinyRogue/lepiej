@@ -669,22 +669,78 @@ function initializePortfolioCarousel() {
 function initializeContactForm() {
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
-  const handleContactSubmit = (e) => {
+
+  const statusEl = contactForm.querySelector(".contact-form-status");
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const defaultBtnText = submitBtn?.textContent ?? "Wyślij wiadomość";
+  const fallbackEmail = "lepiejagencja@gmail.com";
+
+  const showStatus = (type, message, withMailto = false) => {
+    if (!statusEl) return;
+    statusEl.hidden = false;
+    statusEl.classList.remove("is-success", "is-error");
+    statusEl.classList.add(type === "success" ? "is-success" : "is-error");
+    statusEl.replaceChildren();
+
+    if (withMailto) {
+      statusEl.append(document.createTextNode("Coś poszło nie tak. Napisz bezpośrednio: "));
+      const link = document.createElement("a");
+      link.href = `mailto:${fallbackEmail}`;
+      link.textContent = fallbackEmail;
+      statusEl.append(link);
+      return;
+    }
+
+    statusEl.append(document.createTextNode(message));
+  };
+
+  const setLoading = (isLoading) => {
+    contactForm.setAttribute("aria-busy", isLoading ? "true" : "false");
+    if (!submitBtn) return;
+    submitBtn.disabled = isLoading;
+    submitBtn.textContent = isLoading ? "Wysyłanie..." : defaultBtnText;
+  };
+
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
 
-    const titleInput = document.getElementById("form-title");
-    const contentInput = document.getElementById("form-content");
+    const honeypot = contactForm.querySelector('input[name="botcheck"]');
+    if (honeypot?.checked) {
+      showStatus("success", "Dzięki! Odpiszę w 24h.");
+      contactForm.reset();
+      return;
+    }
 
-    const title = titleInput?.value.trim();
-    const content = contentInput?.value.trim();
+    const accessKey = contactForm.querySelector('input[name="access_key"]')?.value?.trim();
+    if (!accessKey) {
+      showStatus("error", "", true);
+      return;
+    }
 
-    if (title && content) {
-      const emailSubject = encodeURIComponent(title);
-      const emailBody = encodeURIComponent(content);
-      const mailtoUrl = `mailto:lepiejagencja@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-      window.open(mailtoUrl, "_blank");
-      titleInput.value = "";
-      contentInput.value = "";
+    setLoading(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(new FormData(contactForm))),
+      });
+
+      const json = await response.json().catch(() => ({}));
+
+      if (response.ok && json.success) {
+        showStatus("success", "Dzięki! Odpiszę w 24h.");
+        contactForm.reset();
+      } else {
+        showStatus("error", "", true);
+      }
+    } catch {
+      showStatus("error", "", true);
+    } finally {
+      setLoading(false);
     }
   };
 
