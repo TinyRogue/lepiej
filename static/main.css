@@ -2894,6 +2894,12 @@ header {
       padding: 0.5em 1em;
       font-size: 0.9em;
     }
+
+    .social-media-offer-row-note {
+      margin: -0.25rem 0 0;
+      font-size: 0.85rem;
+      color: rgba(var(--black-rgb), 0.55);
+    }
   }
 
   .social-media-phones {
