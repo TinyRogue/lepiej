@@ -364,7 +364,8 @@ header {
     opacity: 0;
     transform: translateY(20px);
 
-    &:hover {
+    &:hover,
+    &[aria-current="page"] {
       color: var(--primary);
     }
 
@@ -374,6 +375,17 @@ header {
 
     &.slide-down-fade-out {
       animation: slideDownFadeOut 0.2s ease-in forwards;
+    }
+  }
+
+  a.mobile-nav-sub {
+    font-size: 1.1rem;
+    padding: 0.25rem;
+    color: rgba(var(--black-rgb), 0.6);
+
+    &:hover,
+    &[aria-current="page"] {
+      color: var(--primary);
     }
   }
 
@@ -473,8 +485,94 @@ header {
     transition: color 0.3s;
   }
 
-  .pill:hover {
+  .pill:hover,
+  .pill.is-current {
     color: var(--primary);
+  }
+
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    &::after {
+      content: "";
+      width: 0.35em;
+      height: 0.35em;
+      border-right: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      transform: translateY(-25%) rotate(45deg);
+      transition: transform 0.2s;
+    }
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 13rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background-color: rgba(var(--white-rgb), 0.97);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(var(--black-rgb), 0.08);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -0.25rem;
+    transition:
+      opacity 0.2s ease,
+      translate 0.2s ease,
+      visibility 0.2s;
+
+    /* Keeps the menu open while the pointer crosses the gap below the pill. */
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 100%;
+      height: 0.75rem;
+    }
+
+    a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      color: var(--black);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition:
+        color 0.2s,
+        background-color 0.2s;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--primary);
+        background-color: rgba(var(--primary-rgb), 0.06);
+      }
+
+      &[aria-current="page"] {
+        color: var(--primary);
+        font-weight: 600;
+      }
+    }
+  }
+
+  .nav-dropdown:hover,
+  .nav-dropdown:focus-within {
+    .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      translate: 0 0;
+    }
+
+    .nav-dropdown-trigger::after {
+      transform: translateY(25%) rotate(-135deg);
+    }
   }
 
   .pill.pill-cta {
@@ -2765,31 +2863,60 @@ header {
 
     .collaboration-plan-content-title {
       font-family: var(--serif-font);
-      font-size: 1.25rem;
-      background-color: var(--primary);
-      color: var(--white);
-      padding: 0.25rem 1rem;
-      border-radius: 1rem;
-      width: fit-content;
-      margin: 0 auto;
+      font-size: clamp(1.25rem, 1vw + 1rem, 1.6rem);
       font-weight: 400;
+      color: var(--black);
+      width: 100%;
+      max-width: 28em;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .collaboration-plan-steps {
+      list-style: none;
+      counter-reset: collab-step;
+      margin: 0.75rem auto 0;
+      padding: 0;
+      width: 100%;
+      max-width: 28em;
     }
 
     .collaboration-plan-content-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--black);
-      opacity: 0.4;
-      padding: 1rem;
+      counter-increment: collab-step;
+      display: grid;
+      grid-template-columns: 2.25rem 1fr;
+      align-items: baseline;
+      column-gap: 0.75rem;
+      margin: 0;
+      padding: 0.7rem 0;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      text-align: left;
+      color: rgba(var(--black-rgb), 0.78);
+      border-bottom: 1px solid rgba(var(--black-rgb), 0.1);
 
-      &:hover {
+      &:first-child {
+        border-top: 1px solid rgba(var(--black-rgb), 0.1);
+      }
+
+      &::before {
+        content: counter(collab-step, decimal-leading-zero);
+        grid-row: 1 / span 2;
+        font-family: var(--serif-font);
+        font-size: 0.85rem;
+        font-style: italic;
+        letter-spacing: 0.04em;
+        color: var(--primary);
+      }
+
+      > p {
+        grid-column: 2;
+        margin: 0;
+      }
+
+      &:hover .collaboration-plan-content-item-description {
+        max-height: 100px;
         opacity: 1;
-
-        .collaboration-plan-content-item-description {
-          max-height: 100px;
-          opacity: 1;
-        }
       }
     }
 
@@ -2797,6 +2924,8 @@ header {
       max-height: 0;
       opacity: 0;
       overflow: hidden;
+      font-size: 0.85rem;
+      color: rgba(var(--black-rgb), 0.6);
       transition:
         max-height 1s,
         opacity 0.5s;
