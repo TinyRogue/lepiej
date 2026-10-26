@@ -145,6 +145,8 @@ function initializeCommonElements() {
     document.removeEventListener("keydown", handleKeydown),
   );
 
+  initializePageShortcuts();
+
   function toggleMenu() {
     const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
     const isOpening = !isExpanded;
@@ -198,6 +200,74 @@ function initializePageSpecificElements() {
   initializeUgcCarousel();
   initializeCollabPhotosCarousel();
   initializeScrollReveal();
+}
+
+function initializePageShortcuts() {
+  const shortcuts = document.querySelector(".page-shortcuts");
+  const contact = document.getElementById("contact");
+  if (!shortcuts) return;
+
+  let contactInView = false;
+
+  const rectsOverlap = (a, b) =>
+    !(
+      a.right < b.left ||
+      a.left > b.right ||
+      a.bottom < b.top ||
+      a.top > b.bottom
+    );
+
+  const updateCarouselClearance = () => {
+    const corner = {
+      left: window.innerWidth - 120,
+      right: window.innerWidth,
+      top: window.innerHeight - 140,
+      bottom: window.innerHeight,
+    };
+    const controls = document.querySelectorAll(
+      ".carousel-controls, .sound-toggle-btn-mobile",
+    );
+    let raise = false;
+    controls.forEach((el) => {
+      if (getComputedStyle(el).display === "none") return;
+      const rect = el.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      if (rectsOverlap(corner, rect)) raise = true;
+    });
+    shortcuts.classList.toggle("is-raised", raise);
+  };
+
+  const updateVisibility = () => {
+    const pastHero = window.scrollY > window.innerHeight * 0.6;
+    shortcuts.classList.toggle("is-visible", pastHero && !contactInView);
+    if (pastHero && !contactInView) {
+      updateCarouselClearance();
+    } else {
+      shortcuts.classList.remove("is-raised");
+    }
+  };
+
+  if (contact && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        contactInView = entry.isIntersecting;
+        updateVisibility();
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(contact);
+    cleanupFunctions.push(() => observer.disconnect());
+  }
+
+  const handleScroll = throttle(updateVisibility, 100);
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("resize", handleScroll);
+  cleanupFunctions.push(() => {
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", handleScroll);
+  });
+
+  updateVisibility();
 }
 
 const REVEAL_SELECTORS = [
