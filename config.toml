@@ -19,7 +19,7 @@ description = "Lepiej. is a company that helps brands grow through social media.
 keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
 author = "Lepiej. Team"
 themeColor = "#9E0031"
-coming_soon = false
+coming_soon = true
 
 [params.web3forms]
 devAccessKey = "42924b05-5b38-488d-9354-ebc01571c16c"
