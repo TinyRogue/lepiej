@@ -466,6 +466,8 @@ function initializeCollabPhotosCarousel() {
 function initializeWritingAnimation() {
   const writingElement = document.getElementById("writing-animation");
   if (!writingElement) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const words = ["Kreatywne Treści", "UGC", "Nagrania", "Grafiki"];
   let wordIndex = 0;
   let letterIndex = 0;
