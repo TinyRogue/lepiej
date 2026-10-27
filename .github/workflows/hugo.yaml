@@ -35,7 +35,7 @@ jobs:
           mkdir -p "${HOME}/.local/hugo"
           tar -C "${HOME}/.local/hugo" -xf "${{ runner.temp }}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
           echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
-          hugo version
+          "${HOME}/.local/hugo/hugo" version
 
       - name: Cache restore
         id: cache-restore
