@@ -3,42 +3,51 @@
     "name": "Bandi",
     "url": "https://bandi.pl",
     "logo": "/assets/footer/collaborations/bandi-logo.webp",
-    "alt": "Bandi Logo"
+    "alt": "Bandi Professional"
   },
   {
     "name": "Delive Studios",
     "url": "https://delivestudios.pl/",
     "logo": "/assets/footer/collaborations/delive-studios-logo.webp",
-    "alt": "Delive Studios Logo"
+    "alt": "Delive Studios"
   },
   {
     "name": "Exbud",
     "url": "https://exbud.pl",
     "logo": "/assets/footer/collaborations/exbud-logo.webp",
-    "alt": "Exbud Logo"
+    "alt": "Exbud"
+  },
+  {
+    "name": "Indigo",
+    "alt": "Indigo"
   },
   {
     "name": "Make Me Bio",
     "url": "https://eu.makemebio.com/",
     "logo": "/assets/footer/collaborations/make-me-bio-logo.webp",
-    "alt": "Make Me Bio Logo"
+    "alt": "Make Me Bio"
   },
   {
-    "name": "Pawlowska Beauty",
+    "name": "Pawłowska Podology",
     "url": "https://booksy.com/pl-pl/dl/show-business/101811",
-    "logo": "/assets/footer/collaborations/pawlowska-beauty-logo.svg",
-    "alt": "Pawlowska Beauty Logo"
+    "logo": "/assets/footer/collaborations/pawlowska-podology-logo.svg",
+    "ratio": 1.87,
+    "alt": "Pawłowska Podology"
+  },
+  {
+    "name": "Pedibehr",
+    "alt": "Pedibehr"
   },
   {
     "name": "Say Loca",
     "url": "https://sayloca.pl/",
     "logo": "/assets/footer/collaborations/say-loca-logo.webp",
-    "alt": "Say Loca Logo"
+    "alt": "Say Loca"
   },
   {
-    "name": "Si Senor",
+    "name": "Si Señor",
     "url": "https://sisenor.pl/",
     "logo": "/assets/footer/collaborations/si-senor-logo.webp",
-    "alt": "Si Senor Logo"
+    "alt": "Si Señor"
   }
 ]

@@ -86,6 +86,9 @@
     {{ block "main" . }}{{ end }}
   </main>
 
+  {{ if .IsHome }}
+  {{ partial "testimonials.html" . }}
+  {{ end }}
   {{ partial "collaborations.html" . }}
   {{ partial "footer.html" . }}
 

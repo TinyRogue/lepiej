@@ -1,0 +1,25 @@
+<section class="testimonials" aria-labelledby="testimonials-title">
+  <h2 id="testimonials-title" class="testimonials-title serif">Poczta <span class="i primary">pantoflowa</span></h2>
+  <ul class="testimonials-list">
+    {{ range $.Site.Data.testimonials }}
+    <li class="testimonial">
+      <figure>
+        <blockquote>
+          <p>{{ .quote }}</p>
+        </blockquote>
+        <figcaption>
+          <span class="testimonial-author">
+            <span class="testimonial-name">{{ .name }}</span>
+            <span class="testimonial-brand">{{ .role }}, {{ .brand }}</span>
+          </span>
+          {{ with .photo }}
+          <img class="testimonial-photo" src="{{ . | relURL }}" alt="" width="56" height="56" loading="lazy">
+          {{ else }}
+          <span class="testimonial-photo testimonial-photo-placeholder" aria-hidden="true">{{ substr .name 0 1 }}</span>
+          {{ end }}
+        </figcaption>
+      </figure>
+    </li>
+    {{ end }}
+  </ul>
+</section>

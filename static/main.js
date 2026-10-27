@@ -279,6 +279,8 @@ const REVEAL_SELECTORS = [
   ".meet-me .secondary > .button-cta",
   ".portfolio-title-container",
   ".portfolio .carousel",
+  ".testimonials-title",
+  ".testimonial",
   ".collaborations",
   ".footer-left",
   ".footer-right",

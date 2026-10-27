@@ -1,21 +1,43 @@
-<section class="collaborations">
-  <p>To nie lista. <span class="i">To historia.</span></p>
-  <p>Zobacz, kto już poszedł ze mną w kreatywną stronę.</p>
+<section class="collaborations" aria-label="Marki, z którymi współpracowałam">
+  <p>Marki, którym <span class="i">pomogłam być lepiej.</span></p>
+  <p>Zobacz, kto już poszedł ze mną w kreatywną stronę. Efekty tej współpracy znajdziesz w <a href="{{ "/#portfolio" | relURL }}">portfolio</a>.</p>
   <div class="infinite-carousel-track">
     {{ range $.Site.Data.collaborations }}
+    {{ if .url }}
     <a href="{{ .url }}" class="infinite-carousel-item" target="_blank" rel="noopener noreferrer">
-      {{ $ext := path.Ext .logo }}
-      {{ if eq $ext ".svg" }}
-      <img src="{{ .logo | relURL }}" alt="{{ .alt }}" loading="lazy">
-      {{ else }}
-      {{ $base := strings.TrimSuffix $ext .logo }}
-      <picture>
-        <source srcset="{{ printf "%s.avif" $base | relURL }}" type="image/avif">
-        <source srcset="{{ printf "%s.webp" $base | relURL }}" type="image/webp">
-        <img src="{{ .logo | relURL }}" alt="{{ .alt }}" loading="lazy">
-      </picture>
-      {{ end }}
+      {{ partial "inline/collaboration-logo.html" . }}
     </a>
+    {{ else }}
+    <span class="infinite-carousel-item">
+      {{ partial "inline/collaboration-logo.html" . }}
+    </span>
+    {{ end }}
     {{ end }}
   </div>
 </section>
+
+{{ define "partials/inline/collaboration-logo.html" }}
+{{ with .logo }}
+{{ $ext := path.Ext . }}
+{{/* SVGs have no readable pixel size, so they need an explicit "ratio" (width / height) in the data file. */}}
+{{ $ratio := $.ratio | default 2 }}
+{{ if ne $ext ".svg" }}
+{{ with images.Config (path.Join "static" .) }}
+{{ $ratio = div (float .Width) .Height }}
+{{ end }}
+{{ end }}
+{{ $style := printf "--logo-ratio: %.3f" $ratio | safeCSS }}
+{{ if eq $ext ".svg" }}
+<img src="{{ . | relURL }}" alt="{{ $.alt }}" style="{{ $style }}" loading="lazy">
+{{ else }}
+{{ $base := strings.TrimSuffix $ext . }}
+<picture>
+  <source srcset="{{ printf "%s.avif" $base | relURL }}" type="image/avif">
+  <source srcset="{{ printf "%s.webp" $base | relURL }}" type="image/webp">
+  <img src="{{ . | relURL }}" alt="{{ $.alt }}" style="{{ $style }}" loading="lazy">
+</picture>
+{{ end }}
+{{ else }}
+<span class="logo-wordmark serif">{{ .name }}</span>
+{{ end }}
+{{ end }}
