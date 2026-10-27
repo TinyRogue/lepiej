@@ -685,7 +685,9 @@ function initializeContactForm() {
     statusEl.replaceChildren();
 
     if (withMailto) {
-      statusEl.append(document.createTextNode("Coś poszło nie tak. Napisz bezpośrednio: "));
+      statusEl.append(
+        document.createTextNode("Coś poszło nie tak. Napisz bezpośrednio: "),
+      );
       const link = document.createElement("a");
       link.href = `mailto:${fallbackEmail}`;
       link.textContent = fallbackEmail;
@@ -713,7 +715,9 @@ function initializeContactForm() {
       return;
     }
 
-    const accessKey = contactForm.querySelector('input[name="access_key"]')?.value?.trim();
+    const accessKey = contactForm
+      .querySelector('input[name="access_key"]')
+      ?.value?.trim();
     if (!accessKey) {
       showStatus("error", "", true);
       return;
@@ -757,7 +761,7 @@ function initializeContactForm() {
 
   const updateCounter = () => {
     if (!messageEl || !counterEl) return;
-    const max = messageEl.maxLength > 0 ? messageEl.maxLength : 1000;
+    const max = messageEl.maxLength > 0 ? messageEl.maxLength : 1500;
     counterEl.textContent = `${messageEl.value.length} / ${max}`;
   };
   messageEl?.addEventListener("input", updateCounter);
@@ -775,7 +779,7 @@ function initializeContactForm() {
     const number = (whatsappBtn?.dataset.number ?? "").replace(/\D/g, "");
     if (!number) return;
 
-    const max = messageEl.maxLength > 0 ? messageEl.maxLength : 1000;
+    const max = messageEl.maxLength > 0 ? messageEl.maxLength : 1500;
     const name = nameEl.value.trim();
     const service = serviceEl.value.trim();
     const message = messageEl.value.trim().slice(0, max);
