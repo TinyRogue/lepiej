@@ -2,7 +2,7 @@
   <p>Marki, którym <span class="i">pomogłam być lepiej.</span></p>
   <p>Zobacz, kto już poszedł ze mną w kreatywną stronę. Efekty tej współpracy znajdziesz w <a href="{{ "/#portfolio" | relURL }}">portfolio</a>.</p>
   <div class="infinite-carousel-track">
-    {{ range $.Site.Data.collaborations }}
+    {{ range hugo.Data.collaborations }}
     {{ if .url }}
     <a href="{{ .url }}" class="infinite-carousel-item" target="_blank" rel="noopener noreferrer">
       {{ partial "inline/collaboration-logo.html" . }}
