@@ -932,7 +932,7 @@ header {
   }
 
   .secondary {
-    padding-bottom: 4rem;
+    padding: 0 1.5rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -941,7 +941,8 @@ header {
     gap: 2rem;
 
     .about-me-more-bg {
-      width: 100%;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
       height: 400px;
 
       img {
@@ -960,6 +961,11 @@ header {
       margin-top: -350px;
       position: relative;
       z-index: 2;
+    }
+
+    > p {
+      max-width: 36rem;
+      text-wrap: pretty;
     }
   }
 }

@@ -710,7 +710,7 @@ function initializeContactForm() {
 
     const honeypot = contactForm.querySelector('input[name="botcheck"]');
     if (honeypot?.checked) {
-      showStatus("success", "Dzięki! Odpiszę w 24h.");
+      showStatus("success", "Dzięki! Odpiszę w\u00a024h.");
       contactForm.reset();
       return;
     }
@@ -738,7 +738,7 @@ function initializeContactForm() {
       const json = await response.json().catch(() => ({}));
 
       if (response.ok && json.success) {
-        showStatus("success", "Dzięki! Odpiszę w 24h.");
+        showStatus("success", "Dzięki! Odpiszę w\u00a024h.");
         contactForm.reset();
       } else {
         showStatus("error", "", true);
