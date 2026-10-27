@@ -19,7 +19,7 @@ description = "Lepiej. is a company that helps brands grow through social media.
 keywords = "Lepiej, social media, UGC, illustrations, design, branding, marketing, audit"
 author = "Lepiej. Team"
 themeColor = "#9E0031"
-coming_soon = true
+coming_soon = false
 
 [params.web3forms]
 devAccessKey = "42924b05-5b38-488d-9354-ebc01571c16c"
@@ -35,10 +35,8 @@ filename = "sitemap.xml"
 [markup.goldmark.renderer]
 unsafe = true
 
-# Allow intentionally authored HTML content files under /content
-# (blocked by default since Hugo v0.162.0 for XSS mitigation)
 [security]
-allowContent = ['.*']
+allowContent = ['^text/html$']
 
 [caches]
 [caches.images]
