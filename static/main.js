@@ -750,6 +750,45 @@ function initializeContactForm() {
   cleanupFunctions.push(() =>
     contactForm.removeEventListener("submit", handleContactSubmit),
   );
+
+  const messageEl = contactForm.querySelector("#form-message");
+  const counterEl = contactForm.querySelector("#form-message-counter");
+  const whatsappBtn = contactForm.querySelector("#whatsapp-send");
+
+  const updateCounter = () => {
+    if (!messageEl || !counterEl) return;
+    const max = messageEl.maxLength > 0 ? messageEl.maxLength : 1000;
+    counterEl.textContent = `${messageEl.value.length} / ${max}`;
+  };
+  messageEl?.addEventListener("input", updateCounter);
+  contactForm.addEventListener("reset", () => setTimeout(updateCounter, 0));
+  updateCounter();
+
+  const handleWhatsappClick = () => {
+    const nameEl = contactForm.querySelector("#form-name");
+    const serviceEl = contactForm.querySelector("#form-service");
+
+    if (!nameEl?.reportValidity()) return;
+    if (!serviceEl?.reportValidity()) return;
+    if (!messageEl?.reportValidity()) return;
+
+    const number = (whatsappBtn?.dataset.number ?? "").replace(/\D/g, "");
+    if (!number) return;
+
+    const max = messageEl.maxLength > 0 ? messageEl.maxLength : 1000;
+    const name = nameEl.value.trim();
+    const service = serviceEl.value.trim();
+    const message = messageEl.value.trim().slice(0, max);
+
+    const text = `Cześć! Jestem ${name}. Piszę w sprawie ${service}. ${message}`;
+    const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+  whatsappBtn?.addEventListener("click", handleWhatsappClick);
+  cleanupFunctions.push(() => {
+    whatsappBtn?.removeEventListener("click", handleWhatsappClick);
+    messageEl?.removeEventListener("input", updateCounter);
+  });
 }
 
 function initializeVideos() {

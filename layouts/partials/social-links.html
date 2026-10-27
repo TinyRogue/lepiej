@@ -6,11 +6,13 @@
     </a>
     <a href="https://www.tiktok.com/@lepiej.socialmedia" target="_blank" rel="noopener noreferrer"
       class="social-link tiktok" aria-label="TikTok">
-      <picture>
-        <source srcset="{{ "/assets/utility/tik-tok.avif" | relURL }}" type="image/avif">
-        <source srcset="{{ "/assets/utility/tik-tok.webp" | relURL }}" type="image/webp">
-        <img src="{{ "/assets/utility/tik-tok.webp" | relURL }}" alt="TikTok" width="16" height="16">
-      </picture>
+      <img src="{{ "/assets/utility/tiktok.svg" | relURL }}" alt="TikTok" width="16" height="16">
     </a>
+    {{ with .Site.Params.whatsapp.number }}
+    <a href="https://wa.me/{{ . }}" target="_blank" rel="noopener noreferrer"
+      class="social-link whatsapp" aria-label="WhatsApp">
+      <img src="{{ "/assets/utility/whatsapp.svg" | relURL }}" alt="WhatsApp" width="16" height="16">
+    </a>
+    {{ end }}
   </div>
 </div>

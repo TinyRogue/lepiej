@@ -25,6 +25,9 @@ coming_soon = false
 devAccessKey = "42924b05-5b38-488d-9354-ebc01571c16c"
 prodAccessKey = "34817de5-c140-4e21-af08-432077547e06"
 
+[params.whatsapp]
+number = "48607237702"
+
 [sitemap]
 changefreq = "monthly"
 priority = 0.5

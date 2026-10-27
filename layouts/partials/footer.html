@@ -37,10 +37,15 @@
             <div class="contact-form-field">
               <label for="form-message">Wiadomość</label>
               <textarea name="message" id="form-message" class="form-textarea" rows="4"
-                placeholder="Opowiedz, czego potrzebuje Twoja marka..." required></textarea>
+                placeholder="Opowiedz, czego potrzebuje Twoja marka..." maxlength="1000" required></textarea>
+              <small class="contact-form-counter" id="form-message-counter" aria-live="off">0 / 1000</small>
             </div>
 
-            <button type="submit" class="button-cta">Wyślij wiadomość</button>
+            <div class="contact-form-actions">
+              <button type="submit" class="button-cta">Wyślij wiadomość</button>
+              <button type="button" class="button-cta button-whatsapp" id="whatsapp-send"
+                data-number="{{ .Site.Params.whatsapp.number }}">Wyślij przez WhatsApp</button>
+            </div>
             <p class="contact-form-status" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
